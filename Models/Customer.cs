@@ -38,7 +38,7 @@ namespace Models
         //just added
         public override string ToString()
         {
-            return $"\nName: {this.Name} \nAge: {this.Age} \nemail: {this.Email}";
+            return $"\nName: {this.Name} \nAge: {this.Age} \nemail: {this.Email}\n\n";
         }
     }
 }
