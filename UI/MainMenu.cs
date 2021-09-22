@@ -1,5 +1,6 @@
 using System;
 using StoreBL;
+using Models;
 
 namespace UI
 {
@@ -18,20 +19,25 @@ namespace UI
             do
             {
                 Console.WriteLine("Here is the main menu:");
-                Console.WriteLine("[0] Explore Store");
-                Console.WriteLine("[1] Leave Reviews");
+                Console.WriteLine("[0] Register");
+                Console.WriteLine("[1] Explore Store");
+                Console.WriteLine("[2] Leave Reviews");
                 Console.WriteLine("[x] Exit");
 
                 input = Console.ReadLine();
 
                 switch (input)
                 {
-
                     case "0":
-                        Console.WriteLine("You want to explore the store"); 
+                        CreateCustomer();
+                        //Console.WriteLine("Please register");
                         break;
 
                     case "1":
+                        Console.WriteLine("You want to explore the store"); 
+                        break;
+
+                    case "2":
                         Console.WriteLine("You want to leave a review");
                         break;
 
@@ -47,6 +53,20 @@ namespace UI
             
             }while (!exit); //when true, it will exit. 
 
+        }
+
+        private static void CreateCustomer(){
+
+            Console.WriteLine("Register at Lucky Disks");
+            Console.WriteLine("Name: ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Age: ");
+            string age = Console.ReadLine();
+            Console.WriteLine("Email Address: ");
+            string email = Console.ReadLine();
+
+            Customer newCustomer = new Customer(name, age, email);
+            Console.WriteLine($"You are registered as: {newCustomer.ToString()}");
         }
 
     }
