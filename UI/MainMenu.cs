@@ -34,7 +34,7 @@ namespace UI
                         break;
 
                     case "1":
-                        Console.WriteLine("You want to explore the store"); 
+                        new Inventory().Start(); //if they select 1, it will go to InventoryMenu file and run that method. 
                         break;
 
                     case "2":
@@ -42,7 +42,7 @@ namespace UI
                         break;
 
                     case "x":
-                        Console.WriteLine("Adios");
+                        Console.WriteLine("Have a Great Day!");
                         exit = true; // when i know they want to leave. Flip exit to true. 
                         break;
 
