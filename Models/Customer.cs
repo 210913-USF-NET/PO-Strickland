@@ -5,7 +5,7 @@ namespace Models
 {
     public class Customer
     {
-        public Customer() { }
+        public Customer() {}
 
         //Constructor overloading (this is an example of polymorphism)
         //The constructor behaves differently
@@ -16,22 +16,29 @@ namespace Models
         }
 
         //constructor chaining
-        public Customer(string name, int age) : this(name)
+        public Customer(string name, string age) : this(name)
         {
             this.Age = age;
         }
 
-        public Customer(string name, int age, string city) : this(name, age)
+        public Customer(string name, string age, string email) : this(name, age)
         {
+            this.Email = email;
         }
 
         //Property
         public string Name { get; set; }
 
-        public int Age { get; set; }
+        public string Age { get; set; }
 
-        public string City { get; set; }
+        public string Email { get; set; }
 
         public List<Order> Orders { get; set; } //customers owns this order class
+        
+        //just added
+        public override string ToString()
+        {
+            return $"\nName: {this.Name} \nAge: {this.Age} \nemail: {this.Email}";
+        }
     }
 }
