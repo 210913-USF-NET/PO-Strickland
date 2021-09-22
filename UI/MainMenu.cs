@@ -66,7 +66,7 @@ namespace UI
             string email = Console.ReadLine();
 
             Customer newCustomer = new Customer(name, age, email);
-            Console.WriteLine($"You are registered as: {newCustomer.ToString()}");
+            Console.WriteLine($"\n\nYou are registered as: {newCustomer.ToString()}");
         }
 
     }
