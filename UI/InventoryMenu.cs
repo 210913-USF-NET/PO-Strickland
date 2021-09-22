@@ -20,20 +20,20 @@ namespace UI
             switch (Console.ReadLine())
             {
                 case "0":
-                    Console.WriteLine("\nAll I have is Lord of the Rings.. Directors Cut\n");
+                    Console.WriteLine("\nAll I have is Lord of the Rings.. Directors Cut");
                     break;
                 case "1":
-                    Console.WriteLine("\nI hope you like Harry Potter or Game of Thrones!\n");
+                    Console.WriteLine("\nI hope you like Harry Potter or Game of Thrones!");
                     break;
                 case "2":
-                    Console.WriteLine("\nI have Rock from the 70's, 80's, 90's and some alternative\n");
+                    Console.WriteLine("\nI have Rock from the 70's, 80's, 90's and some alternative");
                     break;
                 case "x":
-                    Console.WriteLine("\nGoodBye! Make sure to recommend any items we should stock!\n");
+                    Console.WriteLine("\nGoodBye! Make sure to recommend any items we should stock!");
                     exit = true;
                     break;
                 default :
-                    Console.WriteLine("\nWhat are you looking for???\n");
+                    Console.WriteLine("\nWhat are you looking for??? Try again");
                     break;
             }
 

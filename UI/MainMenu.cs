@@ -12,6 +12,7 @@ namespace UI
         {
             _bl = bl;
         }
+
         public void Start()
         {
             bool exit = false; //bool variable to enter and exit the do-while loop 
@@ -29,7 +30,7 @@ namespace UI
                 switch (input)
                 {
                     case "0":
-                        CreateCustomer();
+                        CreateCustomer(); 
                         //Console.WriteLine("Please register");
                         break;
 
