@@ -5,9 +5,11 @@ namespace StoreBL
 {
     public interface IBL
     {
-        //List<StoreFront> GetAllStoreFronts();
+        List<StoreFront> GetAllStoreFronts();
 
         List<Movies> GetAllMovies();
         // Movies AddMovie (Movies newMovie);
+
+        void AddCustomer(Customer cust);
     }
 }

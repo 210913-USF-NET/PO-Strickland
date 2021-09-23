@@ -13,10 +13,10 @@ namespace StoreBL
         {
             _repo = repo;
         }
-        // public List<StoreFront> GetAllStoreFronts()
-        // {
-        //     return _repo.GetAllStoreFronts();
-        // }
+        public List<StoreFront> GetAllStoreFronts()
+        {
+            return _repo.GetAllStoreFronts();
+        }
 
         // public List<Movies> GetAllMovies(){ //delete if necessary
         //     return _repo.GetAllMovies();
@@ -26,6 +26,14 @@ namespace StoreBL
             return _repo.GetAllMovies();
 
         }
+
+        public void AddCustomer(Customer cust){
+
+            _repo.AddCustomer(cust); // going to DL
+
+        }
+
+
         
     }
 }
