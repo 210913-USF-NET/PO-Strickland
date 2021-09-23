@@ -12,9 +12,11 @@ namespace DL
     //sealed means class is no longer inheiritable
     public class RAMRepo : IRepo
     {
-        // public RAMRepo(){
-
-        // }
+        List<Customer> _customer = new List <Customer>();
+        public RAMRepo()
+        {
+            //List<Customer> _customer = new List <Customer>();
+        }
 
         public List<StoreFront> GetAllStoreFronts()
         {
@@ -29,19 +31,19 @@ namespace DL
 
 
         private static RAMRepo _instance; //only I can access this instance. NO ONE ELSE CAN. We have an instance
-        private RAMRepo(){ //I hid my constructor. Way to instaniate an object
+        // private RAMRepo(){ //I hid my constructor. Way to instaniate an object
 
-            _movies = new List<Movies>(){
+        //     _movies = new List<Movies>(){
 
-                new Movies(){ //seeded one instance 
+        //         new Movies(){ //seeded one instance 
 
-                    Title = "Lord of the Rings Box Set",
-                    Quantity = "35",
-                    Price = 49.99M
-                }
-            };
+        //             Title = "Lord of the Rings Box Set", *********************************************LEAVE UNCOMMENT
+        //             Quantity = "35",
+        //             Price = 49.99M
+        //         }
+        //     };
 
-        }
+        // }
 
         public static RAMRepo GetInstance(){ // a constructor to return the instance 
 
@@ -61,11 +63,17 @@ namespace DL
 
         }
     
-
+        private static List<Customer> _customers; //made this _customers different than _customer
         public List<Movies> GetAllMovies(){ //we have a way to get all the movies
 
             return _movies;
             
+        }
+        public void AddCustomer(Customer cust){
+
+            _customer.Add(cust);  //added to memory
+
+            Console.WriteLine($"Customer: {cust}");
         }
         
     }
