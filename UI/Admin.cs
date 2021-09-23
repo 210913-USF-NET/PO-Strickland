@@ -71,7 +71,7 @@ namespace UI
                 Console.WriteLine("Quantity: ");
                 string quantity = Console.ReadLine();
 
-                Product newProduct = new Product(name, price, genre, quantity);
+                Product newProduct = new Product(name, price, genre, quantity); //inheritance
                 Console.WriteLine($"\n\nThis product has been updated as: {newProduct.ToString()}");
 
 
@@ -86,7 +86,7 @@ namespace UI
                 Console.WriteLine("Address: ");
                 string address = Console.ReadLine();
 
-                StoreFront newStoreFront = new StoreFront(name, address);
+                StoreFront newStoreFront = new StoreFront(name, address); //inheritance 
                 Console.WriteLine($"\n\nLucky Disks has a new location at: {newStoreFront.ToString()}");
 
 

@@ -2,6 +2,7 @@ using System;
 using StoreBL;
 using Models;
 using DL;
+using StoreBL;
 
 namespace UI
 {
@@ -35,7 +36,7 @@ namespace UI
                         break;
 
                     case "0":
-                        new Registration().Start(); 
+                        new Registration(new BL(new RAMRepo())).Start(); 
                         //Console.WriteLine("Please register");
                         break;
 

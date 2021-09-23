@@ -15,7 +15,7 @@ namespace UI
                 Address = "2400 Elders Rd, Charlotte, NC\n"
             };
             Console.WriteLine(myStore.ToString());
-            new MainMenu(new BL(new ExampleRepo())).Start(); //main menu needs a instance of business logic 
+            new MainMenu(new BL(new RAMRepo())).Start(); //main menu needs a instance of business logic 
             //b
             
 
