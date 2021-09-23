@@ -5,17 +5,18 @@ namespace Models
 {
     public class Customer
     {
-        public Customer() {}
+        public Customer() {} //behaves one way when nothing is passed in 
 
         //Constructor overloading (this is an example of polymorphism)
         //The constructor behaves differently
         //depending on what is passed in
-        public Customer(string name) : this()
+        //behaves this way when a name is passed in
+        public Customer(string name) : this ()
         {
             this.Name = name;
         }
 
-        //constructor chaining
+        //constructor chaining : behaves this way when a age is passed in 
         public Customer(string name, string age) : this(name)
         {
             this.Age = age;
