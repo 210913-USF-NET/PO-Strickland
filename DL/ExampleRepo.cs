@@ -12,15 +12,15 @@ namespace DL
         private const string MoviesFilePath = "../DL/Movies.json";
         private string jsonString;
         
-        public List<StoreFront> GetAllStoreFronts()
-        {
-            //Put your logic to get data here
-            return new List<StoreFront>(){
-                new StoreFront(){
-                    Name = "Store One"
-                }
-            };
-        }
+        // public List<StoreFront> GetAllStoreFronts()
+        // {
+        //     //Put your logic to get data here
+        //     return new List<StoreFront>(){
+        //         new StoreFront(){
+        //             Name = "Store One"
+        //         }
+        //     };
+        // }
 
         public List<Movies> GetAllMovies(){
             jsonString = File.ReadAllText(MoviesFilePath);

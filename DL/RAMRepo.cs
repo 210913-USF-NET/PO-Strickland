@@ -21,7 +21,8 @@ namespace DL
             //Put your logic to get data here
             return new List<StoreFront>(){
                 new StoreFront(){
-                    Name = "Store One"
+                    Name = "Lucky Disks",
+                    Address = "2400 Elder Rd, Charlotte, NC"
                 }
             };
         }
