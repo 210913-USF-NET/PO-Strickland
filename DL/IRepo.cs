@@ -3,10 +3,12 @@ using Models;
 
 namespace DL
 {
-    //this is promised to business logic (BL)
     public interface IRepo
     {
-        List<StoreFront> GetAllStoreFronts();
-        
+        //List<StoreFront> GetAllStoreFronts();
+
+        List<Movies> GetAllMovies(); // can take out if necessary 
+        // Movies AddMovie(Movies newMovie);
+
+        }
     }
-}
