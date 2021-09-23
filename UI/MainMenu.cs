@@ -1,6 +1,7 @@
 using System;
 using StoreBL;
 using Models;
+using DL;
 
 namespace UI
 {
@@ -30,7 +31,7 @@ namespace UI
                 switch (input)
                 {
                     case "0":
-                        CreateCustomer(); 
+                        new Registration().Start(); 
                         //Console.WriteLine("Please register");
                         break;
 
@@ -39,7 +40,7 @@ namespace UI
                         break;
 
                     case "2":
-                        Console.WriteLine("You want to leave a review");
+                        new ReviewMenu().Start();
                         break;
 
                     case "x":
@@ -54,20 +55,6 @@ namespace UI
             
             }while (!exit); //when true, it will exit. 
 
-        }
-
-        private static void CreateCustomer(){
-
-            Console.WriteLine("Register at Lucky Disks");
-            Console.WriteLine("Name: ");
-            string name = Console.ReadLine();
-            Console.WriteLine("Age: ");
-            string age = Console.ReadLine();
-            Console.WriteLine("Email Address: ");
-            string email = Console.ReadLine();
-
-            Customer newCustomer = new Customer(name, age, email);
-            Console.WriteLine($"\n\nYou are registered as: {newCustomer.ToString()}");
         }
 
     }
