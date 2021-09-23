@@ -21,7 +21,7 @@ namespace UI
             do
             {
                 Console.WriteLine("Here is the main menu:");
-                Console.WriteLine("[0] Register");
+                Console.WriteLine("[0] Register as a New User");
                 Console.WriteLine("[1] Explore Store");
                 Console.WriteLine("[2] Leave Reviews");
                 Console.WriteLine("[x] Exit");
@@ -30,6 +30,10 @@ namespace UI
 
                 switch (input)
                 {
+                    case "Admin":
+                        new AdminMenu().Start();
+                        break;
+
                     case "0":
                         new Registration().Start(); 
                         //Console.WriteLine("Please register");

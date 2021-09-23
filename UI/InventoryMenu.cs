@@ -20,7 +20,7 @@ namespace UI
 
             Console.WriteLine("\n\nThis is the Inventory List:\n");
             Console.WriteLine("What would you like to do?\n");
-            Console.WriteLine("[0] Movies");
+            Console.WriteLine("[0] View All Movies");
             Console.WriteLine("[1] View All Books");
             Console.WriteLine("[2] View All CD's");
             Console.WriteLine("[3] Recommend an Item we should stock");
