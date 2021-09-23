@@ -1,26 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using Models;
 using DL;
+using Models;
 
 namespace StoreBL
 {
-    //BL is implementing IBL
-    public class BL : IBL 
+    public class BL : IBL
     {
         private IRepo _repo;
-        //this is how We receive dependency injection
-
-        public BL(IRepo repo){
-            //make sure this IRepo interface has the method GetAllStoreFronts
-
-            _repo = repo; //we assign it ot private IRepo variable
-            
-        }
-
-        public List<StoreFront> GetAllStoreFronts()
+        //dependency injection
+        public BL(IRepo repo)
         {
-            return _repo.GetAllStoreFronts();
+            _repo = repo;
         }
+        // public List<StoreFront> GetAllStoreFronts()
+        // {
+        //     return _repo.GetAllStoreFronts();
+        // }
+
+        // public List<Movies> GetAllMovies(){ //delete if necessary
+        //     return _repo.GetAllMovies();
+
+        public List<Movies> GetAllMovies(){
+
+            return _repo.GetAllMovies();
+
+        }
+        
     }
 }
+
