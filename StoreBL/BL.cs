@@ -9,7 +9,7 @@ namespace StoreBL
     {
         private IRepo _repo;
         //dependency injection
-        public BL(IRepo repo)
+        public BL(IRepo repo) //change back to IRepo
         {
             _repo = repo;
         }
@@ -27,10 +27,15 @@ namespace StoreBL
 
         }
 
-        public void AddCustomer(Customer cust){
+        public void AddCustomer(Customer cust){ //added with the help of nick 
 
             _repo.AddCustomer(cust); // going to DL
 
+        }
+
+        public List<Customer> GetAllCustomers() //Change if doesnt work 
+        {
+            return _repo.GetAllCustomers();
         }
 
 

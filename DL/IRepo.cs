@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Models;
+using System;
 
 namespace DL
 {
@@ -7,10 +8,12 @@ namespace DL
     {
         List<StoreFront> GetAllStoreFronts();
 
-        List<Movies> GetAllMovies(); // can take out if necessary 
-        // Movies AddMovie(Movies newMovie);
+        List<Customer> GetAllCustomers();
 
-        void AddCustomer(Customer cust);
+        List<Movies> GetAllMovies(); // can take out if necessary 
+        Movies AddMovie(Movies newMovie);
+
+        void AddCustomer(Customer cust); // added with the help of nick 
 
         }
     }

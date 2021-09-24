@@ -10,6 +10,8 @@ namespace StoreBL
         List<Movies> GetAllMovies();
         // Movies AddMovie (Movies newMovie);
 
-        void AddCustomer(Customer cust);
+        List<Customer> GetAllCustomers(); //change if doesnt work 
+
+        void AddCustomer(Customer cust); //added with the help of nick 
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Models;
+using System.Text.Json;
+using System.IO;
 
 namespace DL
 { 
@@ -12,10 +14,10 @@ namespace DL
     //sealed means class is no longer inheiritable
     public class RAMRepo : IRepo
     {
-        List<Customer> _customer = new List <Customer>();
+
+        List<Customer> _customer = new List <Customer>(); //added with the help of nick
         public RAMRepo()
         {
-            //List<Customer> _customer = new List <Customer>();
         }
 
         public List<StoreFront> GetAllStoreFronts()
@@ -29,21 +31,7 @@ namespace DL
             };
         }
 
-
         private static RAMRepo _instance; //only I can access this instance. NO ONE ELSE CAN. We have an instance
-        // private RAMRepo(){ //I hid my constructor. Way to instaniate an object
-
-        //     _movies = new List<Movies>(){
-
-        //         new Movies(){ //seeded one instance 
-
-        //             Title = "Lord of the Rings Box Set", *********************************************LEAVE UNCOMMENT
-        //             Quantity = "35",
-        //             Price = 49.99M
-        //         }
-        //     };
-
-        // }
 
         public static RAMRepo GetInstance(){ // a constructor to return the instance 
 
@@ -69,12 +57,30 @@ namespace DL
             return _movies;
             
         }
-        public void AddCustomer(Customer cust){
+    
+        private const string filePath = "../DL/Customers.json";
+        private string jsonString;
 
+        public void AddCustomer(Customer cust)
+        {
             _customer.Add(cust);  //added to memory
 
             Console.WriteLine($"Customer: {cust}");
+            List<Customer> allCustomers = GetAllCustomers();
+
+            allCustomers.Add(cust);
+
+            jsonString = JsonSerializer.Serialize(allCustomers);
+
+            File.WriteAllText(filePath, jsonString);
         }
-        
+
+        public List<Customer> GetAllCustomers()
+        {
+            jsonString = File.ReadAllText(filePath);
+
+            return JsonSerializer.Deserialize<List<Customer>>(jsonString);
+        }
+        // public List<StoreFront> GetAllStoreFronts();
     }
 }
