@@ -9,7 +9,7 @@ namespace UI
 {
     public class Registration : IMenu
     {
-        private IBL _bl;
+        private IBL _bl; //added with the help of nick 
 
         public Registration (IBL bl){
 
@@ -36,7 +36,7 @@ namespace UI
                 Console.WriteLine($"\n\nYou are registered as: {newCustomer.ToString()}");
         }
 
-        private void AddCustomer(Customer cust){
+        private void AddCustomer(Customer cust){// added with the help of nick
 
             _bl.AddCustomer(cust); //will transfer info to bl in next layer 
 

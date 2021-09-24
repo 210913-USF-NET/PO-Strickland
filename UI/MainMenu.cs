@@ -36,7 +36,7 @@ namespace UI
                         break;
 
                     case "0":
-                        new Registration(new BL(new RAMRepo())).Start(); 
+                        new Registration(new BL(new RAMRepo())).Start(); //added with the help of nick 
                         //Console.WriteLine("Please register");
                         break;
 
