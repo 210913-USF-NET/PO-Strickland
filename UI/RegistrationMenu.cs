@@ -19,10 +19,6 @@ namespace UI
 
         public void Start()
         {   
-            
-
-                
-
                 Console.WriteLine("Register at Lucky Disks\n");
                 Console.WriteLine("Name: ");
                 string name = Console.ReadLine();

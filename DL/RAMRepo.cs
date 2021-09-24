@@ -14,7 +14,7 @@ namespace DL
     //sealed means class is no longer inheiritable
     public class RAMRepo : IRepo
     {
-
+        List<Product> _product = new List <Product>();
         List<Customer> _customer = new List <Customer>(); //added with the help of nick
         public RAMRepo()
         {
@@ -50,14 +50,15 @@ namespace DL
             return newMovie;
 
         }
-    
+
+        private static List<Product> _products; //******************************************************
         private static List<Customer> _customers; //made this _customers different than _customer
         public List<Movies> GetAllMovies(){ //we have a way to get all the movies
 
             return _movies;
             
         }
-    
+    //***********************************************************************************************
         private const string filePath = "../DL/Customers.json";
         private string jsonString;
 
@@ -82,5 +83,33 @@ namespace DL
             return JsonSerializer.Deserialize<List<Customer>>(jsonString);
         }
         // public List<StoreFront> GetAllStoreFronts();
+
+        //***********************************************************************************************
+        private const string productFilePath = "../DL/Products.json";
+        private string jsonString2;
+
+        public void AddProduct(Product prod)
+        {
+            _product.Add(prod);  //added to memory
+
+            Console.WriteLine($"Product: {prod}");
+            List<Product> allProducts = GetAllProducts();
+
+            allProducts.Add(prod);
+
+            jsonString2 = JsonSerializer.Serialize(allProducts);
+
+            File.WriteAllText(productFilePath, jsonString2);
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            jsonString2 = File.ReadAllText(productFilePath);
+
+            return JsonSerializer.Deserialize<List<Product>>(jsonString2);
+        }
+
+
+
     }
 }

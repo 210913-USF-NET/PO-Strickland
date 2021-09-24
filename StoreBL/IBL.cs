@@ -13,5 +13,9 @@ namespace StoreBL
         List<Customer> GetAllCustomers(); //change if doesnt work 
 
         void AddCustomer(Customer cust); //added with the help of nick 
+
+        //*************************************************************
+        List<Product> GetAllProducts();
+        void AddProduct(Product prod);
     }
 }

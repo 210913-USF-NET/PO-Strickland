@@ -4,15 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Models;
 using StoreBL;
+using DL;
 
 namespace UI
 {
     public class AdminMenu : IMenu
     {
-        // private IBL _bl;
-        // public void AdminMenu(IBL bl){
-        //     this._bl = bl;
-        // }
+        private IBL _bl;
+        public void MainMenu(IBL bl){
+            this._bl = bl;
+        }
 
         public void Start(){
 
@@ -39,7 +40,7 @@ namespace UI
                     Console.WriteLine("\nHarry Potter or Game of Thrones!");
                     break;
                 case "2":
-                    Products();
+                    new ProductsMenu(new BL(new RAMRepo())).Start();
                     break;
                 case "3":
                     Location();
@@ -58,24 +59,24 @@ namespace UI
         }
 
 
-        private void Products(){ //similar idea to what was used in RestaurantReviews projects
+        // private void Products(){ //similar idea to what was used in RestaurantReviews projects
             
             
-            Console.WriteLine("Products at Lucky Disks\n");
-                Console.WriteLine("Name: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Price: ");
-                string price = Console.ReadLine();
-                Console.WriteLine("Genre: ");
-                string genre = Console.ReadLine();
-                Console.WriteLine("Quantity: ");
-                string quantity = Console.ReadLine();
+        //     Console.WriteLine("Products at Lucky Disks\n");
+        //         Console.WriteLine("Name: ");
+        //         string name = Console.ReadLine();
+        //         Console.WriteLine("Price: ");
+        //         string price = Console.ReadLine();
+        //         Console.WriteLine("Genre: ");
+        //         string genre = Console.ReadLine();
+        //         Console.WriteLine("Quantity: ");
+        //         string quantity = Console.ReadLine();
 
-                Product newProduct = new Product(name, price, genre, quantity); //inheritance
-                Console.WriteLine($"\n\nThis product has been updated as: {newProduct.ToString()}");
+        //         Product newProduct = new Product(name, price, genre, quantity); //inheritance
+        //         Console.WriteLine($"\n\nThis product has been updated as: {newProduct.ToString()}");
 
 
-        }
+        // }
 
         private void Location(){ //similar idea to what was used in RestaurantReviews projects
             
