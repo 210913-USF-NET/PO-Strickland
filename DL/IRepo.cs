@@ -19,6 +19,8 @@ namespace DL
         void AddCustomer(Customer cust); // added with the help of nick 
 
         void AddProduct(Product prod);
+        
+        void AddStoreFront(StoreFront loc);
 
         }
     }

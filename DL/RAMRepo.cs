@@ -14,21 +14,13 @@ namespace DL
     //sealed means class is no longer inheiritable
     public class RAMRepo : IRepo
     {
+        List<StoreFront> _storeFront = new List <StoreFront>();
         List<Product> _product = new List <Product>();
         List<Customer> _customer = new List <Customer>(); //added with the help of nick
+
+    //************************************************************************************************************
         public RAMRepo()
         {
-        }
-
-        public List<StoreFront> GetAllStoreFronts()
-        {
-            //Put your logic to get data here
-            return new List<StoreFront>(){
-                new StoreFront(){
-                    Name = "Lucky Disks",
-                    Address = "2400 Elder Rd, Charlotte, NC"
-                }
-            };
         }
 
         private static RAMRepo _instance; //only I can access this instance. NO ONE ELSE CAN. We have an instance
@@ -41,7 +33,7 @@ namespace DL
             }
             return _instance; //if not, then return what is there already
         }
-
+    //***********************************************************************************************************
         private static List<Movies> _movies; //where I will store all my movies
 
         public Movies AddMovie(Movies newMovie){ //we have a way to add a Movie
@@ -50,15 +42,20 @@ namespace DL
             return newMovie;
 
         }
+    //***********************************************************************************************************
 
-        private static List<Product> _products; //******************************************************
+        private static List<StoreFront> _storeFronts;
+        private static List<Product> _products; 
         private static List<Customer> _customers; //made this _customers different than _customer
+
+
+    //***********************************************************************************************************    
         public List<Movies> GetAllMovies(){ //we have a way to get all the movies
 
             return _movies;
             
         }
-    //***********************************************************************************************
+    //***********************************************************************************************************
         private const string filePath = "../DL/Customers.json";
         private string jsonString;
 
@@ -108,8 +105,40 @@ namespace DL
 
             return JsonSerializer.Deserialize<List<Product>>(jsonString2);
         }
+        //***************************************************************************************************
+        // public List<StoreFront> GetAllStoreFronts()
+        // {
+        //     //Put your logic to get data here
+        //     return new List<StoreFront>(){
+        //         new StoreFront(){
+        //             Name = "Lucky Disks",
+        //             Address = "2400 Elder Rd, Charlotte, NC"
+        //         }
+        //     };
+        // }
+        private const string locationFilePath = "../DL/Locations.json";
+        private string jsonString3;
 
+        public void AddStoreFront(StoreFront loc)
+        {
+            _storeFront.Add(loc);  //added to memory
 
+            Console.WriteLine($"StoreFront: {loc}");
+            List<StoreFront> allStoreFronts = GetAllStoreFronts();
 
+            allStoreFronts.Add(loc);
+
+            jsonString3 = JsonSerializer.Serialize(allStoreFronts);
+
+            File.WriteAllText(locationFilePath, jsonString3);
+        }
+
+        public List<StoreFront> GetAllStoreFronts()
+        {
+            jsonString3 = File.ReadAllText(locationFilePath);
+
+            return JsonSerializer.Deserialize<List<StoreFront>>(jsonString3);
+        }
+    //**************************************************************************************************************
     }
 }

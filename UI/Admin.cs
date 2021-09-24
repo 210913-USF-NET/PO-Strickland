@@ -43,7 +43,7 @@ namespace UI
                     new ProductsMenu(new BL(new RAMRepo())).Start();
                     break;
                 case "3":
-                    Location();
+                    new StoreFrontMenu(new BL(new RAMRepo())).Start();
                     break;
                 case "x":
                     Console.WriteLine("\nGoodBye!");
@@ -78,19 +78,19 @@ namespace UI
 
         // }
 
-        private void Location(){ //similar idea to what was used in RestaurantReviews projects
+    //     private void Location(){ //similar idea to what was used in RestaurantReviews projects
             
             
-            Console.WriteLine("Lucky Disks New Store Locations\n");
-                Console.WriteLine("Name: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Address: ");
-                string address = Console.ReadLine();
+    //         Console.WriteLine("Lucky Disks New Store Locations\n");
+    //             Console.WriteLine("Name: ");
+    //             string name = Console.ReadLine();
+    //             Console.WriteLine("Address: ");
+    //             string address = Console.ReadLine();
 
-                StoreFront newStoreFront = new StoreFront(name, address); //inheritance 
-                Console.WriteLine($"\n\nLucky Disks has a new location at: {newStoreFront.ToString()}");
+    //             StoreFront newStoreFront = new StoreFront(name, address); //inheritance 
+    //             Console.WriteLine($"\n\nLucky Disks has a new location at: {newStoreFront.ToString()}");
 
 
-    }
+    // }
 }
 }

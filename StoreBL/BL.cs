@@ -14,11 +14,17 @@ namespace StoreBL
         {
             _repo = repo;
         }
+        //*********************************************************
+        public void AddStoreFront(StoreFront loc)
+        {
+            _repo.AddStoreFront(loc);
 
+        }
         public List<StoreFront> GetAllStoreFronts()
         {
             return _repo.GetAllStoreFronts();
         }
+        //*********************************************************
 
         public List<Movies> GetAllMovies()
         {
@@ -26,6 +32,7 @@ namespace StoreBL
             return _repo.GetAllMovies();
 
         }
+        //**********************************************************
 
         public void AddCustomer(Customer cust)
         { //added with the help of nick 
@@ -37,7 +44,7 @@ namespace StoreBL
         {
             return _repo.GetAllCustomers();
         }
-
+        //***********************************************************
 
         public void AddProduct(Product prod)
         { //added with the help of nick 
@@ -49,7 +56,7 @@ namespace StoreBL
         {
             return _repo.GetAllProducts();
         }
-
+        //*************************************************************
     }
 }
 
