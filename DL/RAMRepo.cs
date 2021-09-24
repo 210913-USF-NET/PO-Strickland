@@ -12,7 +12,7 @@ namespace DL
     // SDP is used if you want one instance of something regardless of where it is 
     //need non access modifer of sealed to make this work
     //sealed means class is no longer inheiritable
-    public class RAMRepo : IRepo
+    public sealed class RAMRepo : IRepo
     {
         List<StoreFront> _storeFront = new List <StoreFront>();
         List<Product> _product = new List <Product>();
@@ -44,9 +44,9 @@ namespace DL
         }
     //***********************************************************************************************************
 
-        private static List<StoreFront> _storeFronts;
-        private static List<Product> _products; 
-        private static List<Customer> _customers; //made this _customers different than _customer
+        // private static List<StoreFront> _storeFronts;
+        // private static List<Product> _products; 
+        // private static List<Customer> _customers; //made this _customers different than _customer
 
 
     //***********************************************************************************************************    
@@ -56,6 +56,7 @@ namespace DL
             
         }
     //***********************************************************************************************************
+        
         private const string filePath = "../DL/Customers.json";
         private string jsonString;
 
@@ -82,6 +83,7 @@ namespace DL
         // public List<StoreFront> GetAllStoreFronts();
 
         //***********************************************************************************************
+        
         private const string productFilePath = "../DL/Products.json";
         private string jsonString2;
 
@@ -106,16 +108,7 @@ namespace DL
             return JsonSerializer.Deserialize<List<Product>>(jsonString2);
         }
         //***************************************************************************************************
-        // public List<StoreFront> GetAllStoreFronts()
-        // {
-        //     //Put your logic to get data here
-        //     return new List<StoreFront>(){
-        //         new StoreFront(){
-        //             Name = "Lucky Disks",
-        //             Address = "2400 Elder Rd, Charlotte, NC"
-        //         }
-        //     };
-        // }
+        
         private const string locationFilePath = "../DL/Locations.json";
         private string jsonString3;
 
