@@ -11,3 +11,27 @@ Name: Bek
 Age: 31 
 email: bekErga@gmail.com
 2021-09-25 16:14:32.505 -04:00 [INF] Application closing..
+2021-09-25 18:04:30.280 -04:00 [INF] Application Starting..
+2021-09-25 18:04:56.881 -04:00 [INF] Application closing..
+2021-09-25 18:26:06.214 -04:00 [INF] Application Starting..
+2021-09-25 18:26:09.865 -04:00 [INF] Application closing..
+2021-09-25 18:31:01.587 -04:00 [INF] Application Starting..
+2021-09-25 18:31:08.097 -04:00 [INF] Application closing..
+2021-09-25 18:32:57.286 -04:00 [INF] Application Starting..
+2021-09-25 18:38:24.465 -04:00 [INF] Application closing..
+2021-09-25 18:38:33.690 -04:00 [INF] Application Starting..
+2021-09-25 18:38:48.209 -04:00 [INF] Application closing..
+2021-09-25 18:39:51.675 -04:00 [INF] Application Starting..
+2021-09-25 18:45:04.057 -04:00 [INF] Application closing..
+2021-09-25 18:45:12.597 -04:00 [INF] Application Starting..
+2021-09-25 18:45:42.513 -04:00 [INF] Application closing..
+2021-09-25 18:53:22.931 -04:00 [INF] Application Starting..
+2021-09-25 19:03:41.688 -04:00 [INF] Application Starting..
+2021-09-25 19:04:52.456 -04:00 [INF] Application closing..
+2021-09-25 19:06:43.838 -04:00 [INF] Application Starting..
+2021-09-25 19:07:09.501 -04:00 [DBG] DL is adding a customer, 
+Name: Carlos 
+Age: 33 
+email: cldinares@gmail.com
+2021-09-25 19:08:32.251 -04:00 [INF] Application Starting..
+2021-09-25 19:08:41.193 -04:00 [INF] Application closing..

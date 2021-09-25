@@ -36,7 +36,12 @@ namespace UI
                 Address = "2400 Elders Rd, Charlotte, NC\n"
             };
             Console.WriteLine(myStore.ToString());
-            new MainMenu(new BL(new FileRepo())).Start(); //main menu needs a instance of business logic 
+
+            //MenuFactory.GetMenu("main").Start();
+            //new MainMenu(new BL(new FileRepo())).Start(); 
+            new MainMenu().Start();
+            
+            //main menu needs a instance of business logic 
 
             Log.Information("Application closing.."); //once the main menu has exited 
             Log.CloseAndFlush(); //because this is a unmanaged resource, we need to close it by ourselves
