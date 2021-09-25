@@ -11,7 +11,7 @@ namespace UI
     public class AdminMenu : IMenu
     {
         private IBL _bl;
-        public void MainMenu(IBL bl){
+        public AdminMenu(IBL bl){
             this._bl = bl;
         }
 
@@ -23,7 +23,7 @@ namespace UI
             do
             {
 
-            Console.WriteLine("\n\nThis is the Inventory List:\n");
+            Console.WriteLine("\nAdmin Menu:\n");
             Console.WriteLine("What would you like to do?\n");
             Console.WriteLine("[0] View Customers");
             Console.WriteLine("[1] View Inventory");
@@ -34,16 +34,16 @@ namespace UI
             switch (Console.ReadLine())
             {
                 case "0":
-                    Console.WriteLine("Lets see the customers");
+                    Custs();
                     break;
                 case "1":
-                    Console.WriteLine("\nHarry Potter or Game of Thrones!");
+                    Items();
                     break;
                 case "2":
-                    new ProductsMenu(new BL(new RAMRepo())).Start();
+                    new ProductsMenu(new BL(new FileRepo())).Start();
                     break;
                 case "3":
-                    new StoreFrontMenu(new BL(new RAMRepo())).Start();
+                    new StoreFrontMenu(new BL(new FileRepo())).Start();
                     break;
                 case "x":
                     Console.WriteLine("\nGoodBye!");
@@ -58,39 +58,45 @@ namespace UI
 
         }
 
-
-        // private void Products(){ //similar idea to what was used in RestaurantReviews projects
+        private void Custs(){ //similar idea to what was used in RestaurantReviews projects
             
+            List<Customer> allCustomers = _bl.GetAllCustomers();
+
+            if(allCustomers.Count == 0)
+            {
+                Console.WriteLine("No one has registered yet :(");
+            }
+            else
+            {
+                foreach (Customer cust in allCustomers)
+                {
+                    Console.WriteLine(cust.ToString());
+                }
+
+            }
             
-        //     Console.WriteLine("Products at Lucky Disks\n");
-        //         Console.WriteLine("Name: ");
-        //         string name = Console.ReadLine();
-        //         Console.WriteLine("Price: ");
-        //         string price = Console.ReadLine();
-        //         Console.WriteLine("Genre: ");
-        //         string genre = Console.ReadLine();
-        //         Console.WriteLine("Quantity: ");
-        //         string quantity = Console.ReadLine();
 
-        //         Product newProduct = new Product(name, price, genre, quantity); //inheritance
-        //         Console.WriteLine($"\n\nThis product has been updated as: {newProduct.ToString()}");
+        }
 
-
-        // }
-
-    //     private void Location(){ //similar idea to what was used in RestaurantReviews projects
+        private void Items(){ //similar idea to what was used in RestaurantReviews projects
             
+            List<Product> allProducts = _bl.GetAllProducts();
+
+            if(allProducts.Count == 0)
+            {
+                Console.WriteLine("New Orders are on the way");
+            }
+            else
+            {
+                foreach (Product prod in allProducts)
+                {
+                    Console.WriteLine(prod.ToString());
+                }
+
+            }
             
-    //         Console.WriteLine("Lucky Disks New Store Locations\n");
-    //             Console.WriteLine("Name: ");
-    //             string name = Console.ReadLine();
-    //             Console.WriteLine("Address: ");
-    //             string address = Console.ReadLine();
 
-    //             StoreFront newStoreFront = new StoreFront(name, address); //inheritance 
-    //             Console.WriteLine($"\n\nLucky Disks has a new location at: {newStoreFront.ToString()}");
+        }
 
-
-    // }
 }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using DL;
 using Models;
 
-namespace StoreBL
+namespace StoreBL //never have the namespace title the same as the public class title. This will cause an error. 
+//also name title is StoreBL. We use this when connecting to other projects with 'using' keyword
+//thus, 'using StoreBL;' in other parts of the program. 
 {
     public class BL : IBL
     {
@@ -26,12 +28,12 @@ namespace StoreBL
         }
         //*********************************************************
 
-        public List<Movies> GetAllMovies()
-        {
+        // public List<Movies> GetAllMovies()
+        // {
 
-            return _repo.GetAllMovies();
+        //     return _repo.GetAllMovies();
 
-        }
+        // }
         //**********************************************************
 
         public void AddCustomer(Customer cust)
@@ -58,5 +60,13 @@ namespace StoreBL
         }
         //*************************************************************
     }
+
+    /*
+    when we actually implement the interface, we have to declare the
+    access modifer, we have to have these as public. 
+    */
+
+
+
 }
 

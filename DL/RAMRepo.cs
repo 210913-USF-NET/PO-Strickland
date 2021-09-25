@@ -11,19 +11,68 @@ namespace DL
     // Implement IRepo using singleton design pattern
     // SDP is used if you want one instance of something regardless of where it is 
     //need non access modifer of sealed to make this work
-    //sealed means class is no longer inheiritable
+    //sealed means class is no longer inheritable
     public sealed class RAMRepo : IRepo
     {
-        List<StoreFront> _storeFront = new List <StoreFront>();
-        List<Product> _product = new List <Product>();
-        List<Customer> _customer = new List <Customer>(); //added with the help of nick
+        private static RAMRepo _instance; //only I can access this instance. NO ONE ELSE CAN. We have an instance
+
+
+
+        // List<StoreFront> _storeFront = new List <StoreFront>();
+        // List<Product> _product = new List <Product>();
+        // List<Customer> _customer = new List <Customer>(); //added with the help of nick
 
     //************************************************************************************************************
-        public RAMRepo()
+        // public RAMRepo()
+        // {
+        // }
+        //CHANGE BACK!!! 
+
+    //************************************************************************************************************ CAN DELETE IF DOESN'T WORK
+
+
+        private RAMRepo()
         {
+
+
+            _storeFront = new List<StoreFront>()
+            {
+                new StoreFront()
+                {
+                    Name = "Lucky Disks at Charlotte",
+                    Address = "2980 Park Rd, Charlotte, NC"
+                }
+
+            };
+
+            _customer = new List<Customer>(){
+                new Customer()
+                {
+                    Name = "Trey",
+                    Age = "30",
+                    Email = "ctstrick61@gmail.com"
+                }
+            };
+
+            _product = new List<Product>(){
+                new Product()
+                {
+                    Name = "It",
+                    Price = "9.99",
+                    Genre = "Horror",
+                    Quantity = "15"
+                }
+            };
+
+
         }
 
-        private static RAMRepo _instance; //only I can access this instance. NO ONE ELSE CAN. We have an instance
+
+
+    //************************************************************************************************************
+
+
+        // private static RAMRepo _instance; //only I can access this instance. NO ONE ELSE CAN. We have an instance
 
         public static RAMRepo GetInstance(){ // a constructor to return the instance 
 
@@ -33,15 +82,51 @@ namespace DL
             }
             return _instance; //if not, then return what is there already
         }
+
+
+
     //***********************************************************************************************************
-        private static List<Movies> _movies; //where I will store all my movies
-
-        public Movies AddMovie(Movies newMovie){ //we have a way to add a Movie
-
-            _movies.Add(newMovie); //.ADD method comes from system.linq
-            return newMovie;
-
+        // private static List<Customer> _customer;
+        // private static List<StoreFront> _storeFront;
+        // private static List<Product> _product;
+    //***********************************************************************************************************
+        private static List<Customer> _customer;
+        public Customer AddCustomer (Customer cust){
+            _customer.Add(cust);
+            return cust;
         }
+        public List<Customer> GetAllCustomers(){
+            return _customer;
+        }
+
+        private static List<StoreFront> _storeFront;
+        public StoreFront AddStoreFront (StoreFront loc){
+            _storeFront.Add(loc);
+            return loc;
+        }
+        public List<StoreFront> GetAllStoreFronts(){
+            return _storeFront;
+        }
+
+        private List<Product> _product;
+        public Product AddProduct (Product prod){
+            _product.Add(prod);
+            return prod;
+        }
+        public List<Product> GetAllProducts(){
+            return _product;
+        }
+
+
+    //***********************************************************************************************************
+        // private static List<Movies> _movies; //where I will store all my movies
+
+        // public Movies AddMovie(Movies newMovie){ //we have a way to add a Movie
+
+        //     _movies.Add(newMovie); //.ADD method comes from system.linq
+        //     return newMovie;
+
+        // }
     //***********************************************************************************************************
 
         // private static List<StoreFront> _storeFronts;
@@ -50,88 +135,94 @@ namespace DL
 
 
     //***********************************************************************************************************    
-        public List<Movies> GetAllMovies(){ //we have a way to get all the movies
+        // public List<Movies> GetAllMovies(){ //we have a way to get all the movies
 
-            return _movies;
+        //     return _movies;
             
-        }
-    //***********************************************************************************************************
+        // }
+
+
         
-        private const string filePath = "../DL/Customers.json";
-        private string jsonString;
+        // private const string filePath = "../DL/Customers.json";
+        // private string jsonString;
 
-        public void AddCustomer(Customer cust)
-        {
-            _customer.Add(cust);  //added to memory
+        // public void AddCustomer(Customer cust)
+        // {
+        //     _customer.Add(cust);  //added to memory
 
-            Console.WriteLine($"Customer: {cust}");
-            List<Customer> allCustomers = GetAllCustomers();
+        //     Console.WriteLine($"Customer: {cust}");
+        //     List<Customer> allCustomers = GetAllCustomers();
 
-            allCustomers.Add(cust);
+        //     allCustomers.Add(cust);
 
-            jsonString = JsonSerializer.Serialize(allCustomers);
+        //     jsonString = JsonSerializer.Serialize(allCustomers);
 
-            File.WriteAllText(filePath, jsonString);
-        }
+        //     File.WriteAllText(filePath, jsonString);
+        // }
 
-        public List<Customer> GetAllCustomers()
-        {
-            jsonString = File.ReadAllText(filePath);
+        // public List<Customer> GetAllCustomers()
+        // {
+        //     jsonString = File.ReadAllText(filePath);
 
-            return JsonSerializer.Deserialize<List<Customer>>(jsonString);
-        }
+        //     return JsonSerializer.Deserialize<List<Customer>>(jsonString);
+        // }
+
+        //*************************************************************
+
+
+
         // public List<StoreFront> GetAllStoreFronts();
 
         //***********************************************************************************************
         
-        private const string productFilePath = "../DL/Products.json";
-        private string jsonString2;
+        // private const string productFilePath = "../DL/Products.json";
+        // private string jsonString2;
 
-        public void AddProduct(Product prod)
-        {
-            _product.Add(prod);  //added to memory
+        // public void AddProduct(Product prod)
+        // {
+        //     _product.Add(prod);  //added to memory
 
-            Console.WriteLine($"Product: {prod}");
-            List<Product> allProducts = GetAllProducts();
+        //     Console.WriteLine($"Product: {prod}");
+        //     List<Product> allProducts = GetAllProducts();
 
-            allProducts.Add(prod);
+        //     allProducts.Add(prod);
 
-            jsonString2 = JsonSerializer.Serialize(allProducts);
+        //     jsonString2 = JsonSerializer.Serialize(allProducts);
 
-            File.WriteAllText(productFilePath, jsonString2);
-        }
+        //     File.WriteAllText(productFilePath, jsonString2);
+        // }
 
-        public List<Product> GetAllProducts()
-        {
-            jsonString2 = File.ReadAllText(productFilePath);
+        // public List<Product> GetAllProducts()
+        // {
+        //     jsonString2 = File.ReadAllText(productFilePath);
 
-            return JsonSerializer.Deserialize<List<Product>>(jsonString2);
-        }
+        //     return JsonSerializer.Deserialize<List<Product>>(jsonString2);
+        // }
         //***************************************************************************************************
         
-        private const string locationFilePath = "../DL/Locations.json";
-        private string jsonString3;
+        // private const string locationFilePath = "../DL/Locations.json";
+        // private string jsonString3;
 
-        public void AddStoreFront(StoreFront loc)
-        {
-            _storeFront.Add(loc);  //added to memory
+        // public void AddStoreFront(StoreFront loc)
+        // {
+        //     _storeFront.Add(loc);  //added to memory
 
-            Console.WriteLine($"StoreFront: {loc}");
-            List<StoreFront> allStoreFronts = GetAllStoreFronts();
+        //     Console.WriteLine($"StoreFront: {loc}");
+        //     List<StoreFront> allStoreFronts = GetAllStoreFronts();
 
-            allStoreFronts.Add(loc);
+        //     allStoreFronts.Add(loc);
 
-            jsonString3 = JsonSerializer.Serialize(allStoreFronts);
+        //     jsonString3 = JsonSerializer.Serialize(allStoreFronts);
 
-            File.WriteAllText(locationFilePath, jsonString3);
-        }
+        //     File.WriteAllText(locationFilePath, jsonString3);
+        // }
 
-        public List<StoreFront> GetAllStoreFronts()
-        {
-            jsonString3 = File.ReadAllText(locationFilePath);
+        // public List<StoreFront> GetAllStoreFronts()
+        // {
+        //     jsonString3 = File.ReadAllText(locationFilePath);
 
-            return JsonSerializer.Deserialize<List<StoreFront>>(jsonString3);
-        }
+        //     return JsonSerializer.Deserialize<List<StoreFront>>(jsonString3);
+        // }
     //**************************************************************************************************************
     }
 }

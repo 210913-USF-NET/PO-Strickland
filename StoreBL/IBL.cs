@@ -10,7 +10,7 @@ namespace StoreBL
 
         void AddStoreFront(StoreFront loc);
     //******************************************************************
-        List<Movies> GetAllMovies();
+        // List<Movies> GetAllMovies();
 
         // Movies AddMovie (Movies newMovie);
     
@@ -25,4 +25,10 @@ namespace StoreBL
         void AddProduct(Product prod);
     //********************************************************************
     }
+
+    /*
+    when we have an interface (same is true for interface in Models, UI, DL)
+    these members are public by default. This way we don't have to have 
+    access modifier in front of it
+    */
 }

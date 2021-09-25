@@ -2,13 +2,13 @@ using System;
 using StoreBL;
 using Models;
 using DL;
-using StoreBL;
+
 
 namespace UI
 {
      public class MainMenu : IMenu //we implement IMenu which contains the start method for the user 
     {
-        //main menu needs ways to access BL
+        //main menu needs ways to access StoreBL
         private IBL _bl;
         public MainMenu(IBL bl)
         {
@@ -18,7 +18,7 @@ namespace UI
         public void Start()
         {
             bool exit = false; //bool variable to enter and exit the do-while loop 
-            string input = ""; //default string variable to take in user input   
+            string input = ""; //default string variable to take in user input.. type checking
             do
             {
                 Console.WriteLine("Here is the main menu:");
@@ -32,19 +32,23 @@ namespace UI
                 switch (input)
                 {
                     case "Admin":
-                        new AdminMenu().Start();
+                        // MenuFactory.GetMenu("Admin").Start();
+                        new AdminMenu(new BL(new FileRepo())).Start();
                         break;
 
                     case "0":
-                        new Registration(new BL(new RAMRepo())).Start(); //added with the help of nick 
+                        // MenuFactory.GetMenu("register");
+                        new Registration(new BL(new FileRepo())).Start(); //implement instance of business logic which is implementing DL: RAMRepo
                         //Console.WriteLine("Please register");
                         break;
 
                     case "1":
-                        new Inventory().Start(); //if they select 1, it will go to InventoryMenu file and run that method. 
+                        // MenuFactory.GetMenu("inventory");
+                        new InventoryMenu(new BL(new FileRepo())).Start(); //if they select 1, it will go to InventoryMenu file and run that method. 
                         break;
 
                     case "2":
+                        // MenuFactory.GetMenu("review");
                         new ReviewMenu().Start();
                         break;
 

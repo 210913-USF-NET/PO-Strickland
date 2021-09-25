@@ -10,17 +10,17 @@ namespace DL
 
         List<Customer> GetAllCustomers();
 
-        List<Movies> GetAllMovies(); // can take out if necessary 
+        // List<Movies> GetAllMovies(); // can take out if necessary 
 
         List<Product> GetAllProducts();
 
-        Movies AddMovie(Movies newMovie);
+        // Movies AddMovie(Movies newMovie);
 
-        void AddCustomer(Customer cust); // added with the help of nick 
+        Customer AddCustomer(Customer cust); // added with the help of nick 
 
-        void AddProduct(Product prod);
+        Product AddProduct(Product prod);
         
-        void AddStoreFront(StoreFront loc);
+        StoreFront AddStoreFront(StoreFront loc);
 
         }
     }
