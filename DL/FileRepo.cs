@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Models;
 using System.Text.Json;
 using System.IO;
+using Serilog;
 
 namespace DL
 {
@@ -24,7 +25,8 @@ namespace DL
         /// <returns> the added cust </returns>
 
         public Customer AddCustomer(Customer cust)
-        {
+        {   
+            Log.Debug("DL is adding a customer, {0}", cust.ToString());
             List<Customer> allCustomers = GetAllCustomers();
             allCustomers.Add(cust);
 
@@ -54,6 +56,7 @@ namespace DL
 
         public Product AddProduct(Product prod)
         {
+            Log.Debug("DL is adding a product, {0}", prod.ToString());
             List<Product> allProducts = GetAllProducts();
             allProducts.Add(prod);
 
@@ -84,6 +87,7 @@ namespace DL
 
         public StoreFront AddStoreFront(StoreFront loc)
         {
+            Log.Debug("DL is adding a StoreFront, {0}", loc.ToString());
             List<StoreFront> allStoreFronts = GetAllStoreFronts();
             allStoreFronts.Add(loc);
 
@@ -145,7 +149,7 @@ namespace DL
             //to get me the location of the restaurant in the list
             //if there is a match
             List<Product> allProducts = GetAllProducts();
-            int ProductIndex = allProducts.FindIndex(r => r.Equals(productToUpdate));
+            int ProductIndex = allProducts.FindIndex(r => r.Equals(productToUpdate)); //without this, the product files wont update with the review 
 
             //update the restaurant in the list itself
             allProducts[ProductIndex] = productToUpdate;

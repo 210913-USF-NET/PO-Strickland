@@ -78,9 +78,7 @@ namespace UI
             List<StoreFront> allStoreFronts = _bl.GetAllStoreFronts();
 
             if(allStoreFronts.Count == 0)
-            {
-                Console.WriteLine("Sorry, this is the only current location :/");
-            }
+            {            }
             else
             {
                 foreach (StoreFront loc in allStoreFronts)

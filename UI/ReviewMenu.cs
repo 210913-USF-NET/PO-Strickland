@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Models;
 using StoreBL;
-// using DL;
+using Serilog;
 
 namespace UI
 {
@@ -111,13 +111,14 @@ namespace UI
 
                 Console.WriteLine("Note about product: ");
                 reviewToAdd.Note = Console.ReadLine();
-                selectedProduct.Reviews.Add(reviewToAdd);
+                selectedProduct.Reviews.Add(reviewToAdd); //this part was added right after adding 'public bool Equals(Product prod){' in models class 
 
                 Product updatedProduct = _bl.UpdateProduct(selectedProduct);
                 Console.WriteLine("Review has been added!");
                 Console.WriteLine(updatedProduct);
                 foreach(Review review in updatedProduct.Reviews){
-                    Console.WriteLine(review);
+                    Log.Debug("Adding review to product.. ");
+                    Console.WriteLine(review); //loop through the reviews list and update the product 
                 }
             }
             else{

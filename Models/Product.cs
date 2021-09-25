@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Serilog;
 
 
 namespace Models
@@ -17,6 +18,7 @@ namespace Models
         //behaves this way when a name is passed in
         public Product(string name) : this ()
         {
+            Log.Debug("Creating product");
             this.Name = name;
         }
 
@@ -56,7 +58,7 @@ namespace Models
 
         public bool Equals(Product prod){
             return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre && this.Quantity == prod.Quantity;
-        }
+        } //this compares two products.. it compares if it is the same object in the heap
 
         public override string ToString(){
             return $"Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.Quantity}";
