@@ -1,0 +1,13 @@
+2021-09-25 16:00:12.741 -04:00 [INF] Application Starting..
+2021-09-25 16:00:20.209 -04:00 [INF] Application closing..
+2021-09-25 16:07:24.923 -04:00 [INF] Application Starting..
+2021-09-25 16:08:05.041 -04:00 [DBG] Creating product
+2021-09-25 16:08:31.260 -04:00 [DBG] Adding review to product.. 
+2021-09-25 16:08:31.261 -04:00 [DBG] Adding review to product.. 
+2021-09-25 16:08:49.753 -04:00 [INF] Application closing..
+2021-09-25 16:13:59.534 -04:00 [INF] Application Starting..
+2021-09-25 16:14:26.358 -04:00 [DBG] DL is adding a customer, 
+Name: Bek 
+Age: 31 
+email: bekErga@gmail.com
+2021-09-25 16:14:32.505 -04:00 [INF] Application closing..
