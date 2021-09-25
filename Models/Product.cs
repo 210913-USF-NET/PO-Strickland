@@ -6,7 +6,10 @@ namespace Models
 {
     public class Product
     {
-        public Product() {} //behaves one way when nothing is passed in 
+        public Product() {
+             //just added 
+            this.Reviews = new List<Review>();
+        } //behaves one way when nothing is passed in 
 
         //Constructor overloading (this is an example of polymorphism)
         //The constructor behaves differently
@@ -33,8 +36,6 @@ namespace Models
             this.Quantity = quantity;
         }
 
-
-
         public string Name { get; set; }
 
         public string Price { get; set; } //decimal is a data type that makes things line up exactly like money
@@ -45,9 +46,20 @@ namespace Models
 
         public List<LineItem> LineItems { get; set; } //products own the lineItem
 
+
+        public List<Review> Reviews {get; set;} //just added 
+
+        /*
+        need this below to attach the review to a product item
+        without this, I kept receiving a System.ArgumentOutOfRangeException 
+        message. I am not sure why this make it work */ 
+
+        public bool Equals(Product prod){
+            return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre && this.Quantity == prod.Quantity;
+        }
+
         public override string ToString(){
             return $"Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.Quantity}";
         }
-
     }
 }

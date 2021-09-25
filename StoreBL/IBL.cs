@@ -10,10 +10,7 @@ namespace StoreBL
 
         void AddStoreFront(StoreFront loc);
     //******************************************************************
-        // List<Movies> GetAllMovies();
 
-        // Movies AddMovie (Movies newMovie);
-    
     //******************************************************************
         List<Customer> GetAllCustomers(); //change if doesnt work 
 
@@ -24,6 +21,10 @@ namespace StoreBL
 
         void AddProduct(Product prod);
     //********************************************************************
+
+        Product UpdateProduct(Product productToUpdate );
+
+        
     }
 
     /*

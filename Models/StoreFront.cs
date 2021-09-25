@@ -6,7 +6,6 @@ namespace Models
     public class StoreFront
     {
         public StoreFront() {
-            
         }
 
         public StoreFront(string name) : this(){

@@ -28,12 +28,6 @@ namespace StoreBL //never have the namespace title the same as the public class 
         }
         //*********************************************************
 
-        // public List<Movies> GetAllMovies()
-        // {
-
-        //     return _repo.GetAllMovies();
-
-        // }
         //**********************************************************
 
         public void AddCustomer(Customer cust)
@@ -59,6 +53,12 @@ namespace StoreBL //never have the namespace title the same as the public class 
             return _repo.GetAllProducts();
         }
         //*************************************************************
+
+        public Product UpdateProduct(Product productToUpdate )
+
+        {
+            return _repo.UpdateProduct(productToUpdate);
+        }
     }
 
     /*
