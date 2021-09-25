@@ -55,11 +55,6 @@ namespace UI
         } while (!exit);
 
         }
-        // private void AddProduct(Product prod){// added with the help of nick
-
-        //     _bl.AddProduct(prod); //will transfer info to bl in next layer 
-
-        // }
 
         private void Items(){ //similar idea to what was used in RestaurantReviews projects
             
@@ -76,9 +71,7 @@ namespace UI
                     Console.WriteLine(prod.ToString());
                 }
 
-            }
-            
-
+            } 
         }
         private void Locations(){ //similar idea to what was used in RestaurantReviews projects
             
@@ -94,11 +87,7 @@ namespace UI
                 {
                     Console.WriteLine(loc.ToString());
                 }
-
             }
-            
-
         }
-        
     }
 }

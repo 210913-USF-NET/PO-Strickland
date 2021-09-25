@@ -28,18 +28,11 @@ namespace UI
                 StoreFront newStoreFront = new StoreFront(name, address); //inheritance 
                 AddStoreFront(newStoreFront);
                 Console.WriteLine($"\n\nLucky Disks has a new location at: {newStoreFront.ToString()}");
-
-
-    }
+        }
 
         private void AddStoreFront(StoreFront loc){// added with the help of nick
 
             _bl.AddStoreFront(loc); //will transfer info to bl in next layer 
-
         }
-
-
     }
-    
-
 }

@@ -72,10 +72,7 @@ namespace UI
                 {
                     Console.WriteLine(cust.ToString());
                 }
-
             }
-            
-
         }
 
         private void Items(){ //similar idea to what was used in RestaurantReviews projects

@@ -49,7 +49,7 @@ namespace UI
 
                     case "2":
                         // MenuFactory.GetMenu("review");
-                        new ReviewMenu().Start();
+                        new ReviewMenu(new BL(new FileRepo())).Start();
                         break;
 
                     case "x":

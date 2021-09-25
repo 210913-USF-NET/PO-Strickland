@@ -35,10 +35,6 @@ namespace UI
         private void AddCustomer(Customer cust){// added with the help of nick
 
             _bl.AddCustomer(cust); //will transfer info to bl in next layer 
-
         }
-
-
     }
-
 }

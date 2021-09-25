@@ -37,10 +37,6 @@ namespace UI
         private void AddProduct(Product prod){// added with the help of nick
 
             _bl.AddProduct(prod); //will transfer info to bl in next layer 
-
         }
-
-
     }
-
 }

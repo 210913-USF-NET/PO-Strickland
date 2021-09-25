@@ -16,9 +16,6 @@ namespace UI
             };
             Console.WriteLine(myStore.ToString());
             new MainMenu(new BL(new FileRepo())).Start(); //main menu needs a instance of business logic 
-            //b
-            
-
         }
     }
 }
