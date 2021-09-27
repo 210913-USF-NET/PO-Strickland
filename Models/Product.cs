@@ -33,23 +33,36 @@ namespace Models
             this.Genre = genre;
         }
 
+        // public Product(string name, string price, string genre, int quantity) : this(name, price, genre)
+        // {
+        //     this.Quantity = quantity;
+        // }
+
         public Product(string name, string price, string genre, string quantity) : this(name, price, genre)
         {
             this.Quantity = quantity;
         }
 
+
         public string Name { get; set; }
+        
 
         public string Price { get; set; } //decimal is a data type that makes things line up exactly like money
 
         public string Genre { get; set; }
 
-        public string Quantity { get; set; }
+        //public int Quantity { get; set; }
+        public string Quantity {get; set;}
+        
+
+        public int Id {get; set;}
 
         public List<LineItem> LineItems { get; set; } //products own the lineItem
 
 
-        public List<Review> Reviews {get; set;} //just added 
+        public List<Review> Reviews {get; set;} //just added
+
+        public List<Order> Orders {get; set;} 
 
         /*
         need this below to attach the review to a product item

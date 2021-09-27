@@ -59,6 +59,39 @@ namespace StoreBL //never have the namespace title the same as the public class 
         {
             return _repo.UpdateProduct(productToUpdate);
         }
+
+        //*************************************************************
+        public void loginCustomer(Customer cust){
+            _repo.loginCustomer(cust);
+        }
+
+
+        public void AddOrder(Order ord)
+        { //added with the help of nick 
+
+           return; // going to DL
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            throw new NotImplementedException();
+        }
+
+        // public void List<Order> AddOrder()
+        // {
+        //     return;
+        // }
+
+        public void AddLineItem(LineItem line)
+        {
+            _repo.AddLineItem(line);
+
+        }
+        // public List<LineItem> GetAllLineItems()
+        // {
+        //     return _repo.GetAllLineItems();
+        // }
+
     }
 
     /*

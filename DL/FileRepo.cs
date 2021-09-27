@@ -163,6 +163,44 @@ namespace DL
             return productToUpdate;
         }
 
+
+        public Customer loginCustomer(Customer cust)
+        {   
+            return cust;
+        }
+        
+        //*******************************************************************************************
+        // private const string OrdersFilePath = "../DL/Orders.json";
+        // private string jsonString5;
+        // /// <summary>
+        // /// 
+        // /// </summary>
+        // /// <param name="line"></param>
+        // /// <returns></returns>
+        
+
+        public LineItem AddLineItem(LineItem line)
+        {
+            // Log.Debug("DL is adding a Order, {0}", line.ToString());
+            // List<LineItem> allLineItems = GetAllLineItems();
+            // allLineItems.Add(line);
+
+            // jsonString5 = JsonSerializer.Serialize(allLineItems);
+
+            // File.WriteAllText(OrdersFilePath, jsonString5);
+
+            return line;
+        }
+
+        // public List<LineItem> GetAllLineItems()
+        // {
+        //     jsonString5 = File.ReadAllText(OrdersFilePath);
+
+        //     //return GetAllLineItems(); //i dont know what this will do .. found out, it will print getalllines forever!
+
+
+        //     return JsonSerializer.Deserialize<List<StoreFront>>(jsonString5);
+    }
+
         
     }
-}

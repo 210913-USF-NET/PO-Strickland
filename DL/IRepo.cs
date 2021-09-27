@@ -14,15 +14,25 @@ namespace DL
 
         List<Product> GetAllProducts();
 
+        //List<LineItem> GetAllLineItems();
+
         Customer AddCustomer(Customer cust); // added with the help of nick 
 
         Product AddProduct(Product prod);
         
         StoreFront AddStoreFront(StoreFront loc);
 
+        LineItem AddLineItem(LineItem line);
+
         // Review AddReview(Review rev);
 
         Product UpdateProduct(Product productToUpdate);
+
+        Customer loginCustomer(Customer cust);
+
+        // Order AddOrder (Order ord);
+
+        // List<Order> GetAllOrders(Order ord);
 
         }
     }

@@ -20,6 +20,8 @@ namespace Models
 
         public string Name { get; set; }
         public string Address { get; set; }
+
+        public int Id {get; set;}
         
 
         public List<Inventory> Inventories { get; set; }
@@ -28,5 +30,11 @@ namespace Models
         {
             return $"\nStoreFront: {this.Name} \nAddress: {this.Address}";
         }
+
+        public bool Equals(StoreFront loc){
+            return this.Name == loc.Name && this.Address == loc.Address;
+        }
+
+
     }
 }

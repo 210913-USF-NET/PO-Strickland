@@ -29,6 +29,8 @@ namespace Models
 
         public string Note {get; set;}
 
+        public int Id {get; set;}
+
         // public List<Product> Product { get; set; }
 
         public override string ToString(){

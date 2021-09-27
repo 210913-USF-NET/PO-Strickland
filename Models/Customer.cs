@@ -34,6 +34,8 @@ namespace Models
 
         public string Email { get; set; }
 
+        public int Id {get; set;}
+
         public List<Order> Orders { get; set; } //customers owns this order class
         
         //just added
@@ -41,5 +43,9 @@ namespace Models
         {
             return $"\nName: {this.Name} \nAge: {this.Age} \nemail: {this.Email}";
         }
+
+        public bool Equals(Customer cust){
+            return this.Name == cust.Name && this.Age == cust.Age && this.Email == cust.Email;
+        } 
     }
 }

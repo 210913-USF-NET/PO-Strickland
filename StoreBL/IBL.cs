@@ -23,6 +23,20 @@ namespace StoreBL
     //********************************************************************
 
         Product UpdateProduct(Product productToUpdate );
+    
+    //********************************************************************
+
+        void loginCustomer(Customer customer);
+
+
+        List<Order> GetAllOrders(); //change if doesnt work 
+
+        void AddOrder(Order ord); //added with the help of nick 
+
+
+        //List<LineItem> GetAllLineItems(); //change if doesnt work 
+
+        void AddLineItem(LineItem line); //added with the help of nick 
 
         
     }

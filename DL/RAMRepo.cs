@@ -45,7 +45,19 @@ namespace DL
                     Price = "9.99",
                     Genre = "Horror",
                     Quantity = "15"
+                    //Quantity = 15
                 }
+            };
+
+            _line = new List<LineItem>(){
+                new LineItem(){
+
+                    Email = "ctstrick61@gmail.com",
+                    Name = "IT",
+                    Quantity = "2"
+                }
+
+
             };
         }
     //************************************************************************************************************
@@ -69,6 +81,13 @@ namespace DL
             _customer.Add(cust);
             return cust;
         }
+
+        public Customer loginCustomer (Customer cust){
+            _customer.Add(cust);
+            return cust;
+
+        }
+        
 
         public List<Customer> GetAllCustomers(){
             return _customer;
@@ -96,6 +115,16 @@ namespace DL
             return _product;
         }
     //******************************************************************
+        private List<LineItem> _line;
+
+        public LineItem AddLineItem (LineItem line){
+            _line.Add(line);
+            return line;
+        }
+
+        public List<LineItem> GetAllLineItems(){
+            return _line;
+        }
     //******************************************************************
         public Product UpdateProduct(Product productToUpdate)
         {
