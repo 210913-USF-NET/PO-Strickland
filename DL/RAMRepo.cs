@@ -44,8 +44,8 @@ namespace DL
                     Name = "It",
                     Price = "9.99",
                     Genre = "Horror",
-                    Quantity = "15"
-                    //Quantity = 15
+                    //Quantity = "15"
+                    Quantity = 15
                 }
             };
 
