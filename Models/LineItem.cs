@@ -11,7 +11,9 @@ namespace Models
         }
         
 
-        public int Id {get; set;}
+        public int OrderId {get; set;}
+
+        public int ProductId  {get; set;}
 
         public LineItem(string name) : this(){
             this.Name = name;

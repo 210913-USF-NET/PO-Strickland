@@ -21,7 +21,7 @@ namespace Models
         public string Name { get; set; }
         public string Address { get; set; }
 
-        public int Id {get; set;}
+        public int StoreFrontId {get; set;}
         
 
         public List<Inventory> Inventories { get; set; }

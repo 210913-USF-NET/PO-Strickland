@@ -38,7 +38,7 @@ namespace Models
         //     this.Quantity = quantity;
         // }
 
-        public Product(string name, string price, string genre, string quantity) : this(name, price, genre)
+        public Product(string name, string price, string genre, int quantity) : this(name, price, genre)
         {
             this.Quantity = quantity;
         }
@@ -52,10 +52,10 @@ namespace Models
         public string Genre { get; set; }
 
         //public int Quantity { get; set; }
-        public string Quantity {get; set;}
+        public int Quantity {get; set;}
         
 
-        public int Id {get; set;}
+        public int ProductId {get; set;}
 
         public List<LineItem> LineItems { get; set; } //products own the lineItem
 

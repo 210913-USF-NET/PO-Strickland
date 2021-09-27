@@ -29,12 +29,11 @@ namespace UI
                 string genre = Console.ReadLine();
                 Console.WriteLine("Quantity: ");
                 string quantity = Console.ReadLine();
-                // int parsedQuantity;
-                // bool parseSuccess = Int32.TryParse(quantity, out parsedQuantity);
-                // totalQuantity = parsedQuantity;
+                int parsedQuantity;
+                bool parseSuccess = Int32.TryParse(quantity, out parsedQuantity);
                 
                 //Product newProduct = new Product(name, price, genre, totalQuantity);
-                Product newProduct = new Product(name, price, genre, quantity); //inheritance
+                Product newProduct = new Product(name, price, genre, parsedQuantity); //inheritance
                 AddProduct(newProduct); //this add the new product to the AddProduct constructor which takes it to the BL layer
                 Console.WriteLine($"\n\nThis product has been updated as: {newProduct.ToString()}");
         }

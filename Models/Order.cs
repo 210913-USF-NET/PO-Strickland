@@ -20,9 +20,9 @@ namespace Models
 
         public string Email{get; set;}
 
+        public List <LineItem> LineItems {get; set;}
 
-        public int Id {get; set;}
-
+        public List <Product> Products {get; set;}
         private int _quantity; 
 
         public int Quantity {
@@ -53,6 +53,7 @@ namespace Models
         //      //just added 
         //     this.Product = new List<Product>();
         // }
-
+        public int OrderId {get; set;}
+        public int Customerid {get; set;}
     }
 }

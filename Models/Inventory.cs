@@ -6,7 +6,9 @@ namespace Models
         
         public int Quantity { get; set; }
 
-        public int Id {get; set;}
+        public int ProductId {get; set;}
+
+        public int StoreId {get; set;}
 
 
     }

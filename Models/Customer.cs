@@ -47,5 +47,7 @@ namespace Models
         public bool Equals(Customer cust){
             return this.Name == cust.Name && this.Age == cust.Age && this.Email == cust.Email;
         } 
+
+        public int CustomerId {get; set;}
     }
 }
