@@ -23,8 +23,9 @@ namespace UI
             {
                 Console.WriteLine("Here is the main menu:");
                 Console.WriteLine("[0] Register as a New User");
-                Console.WriteLine("[1] Explore Store");
-                Console.WriteLine("[2] Leave Reviews");
+                Console.WriteLine("[1] Login");
+                Console.WriteLine("[2] Explore Store");
+                Console.WriteLine("[3] Leave Reviews");
                 Console.WriteLine("[x] Exit");
 
                 input = Console.ReadLine();
@@ -42,11 +43,16 @@ namespace UI
                         break;
 
                     case "1":
+                        MenuFactory.GetMenu("login").Start();
+                        //new Registration(new BL(new FileRepo())).Start(); //implement instance of business logic which is implementing DL: RAMRepo
+                        break;    
+
+                    case "2":
                         MenuFactory.GetMenu("inventory").Start();
                         //new InventoryMenu(new BL(new FileRepo())).Start(); //if they select 1, it will go to InventoryMenu file and run that method. 
                         break;
 
-                    case "2":
+                    case "3":
                         MenuFactory.GetMenu("review").Start();
                         //new ReviewMenu(new BL(new FileRepo())).Start();
                         break;

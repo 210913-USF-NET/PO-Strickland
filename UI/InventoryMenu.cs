@@ -2,6 +2,7 @@ using System;
 using StoreBL;
 using System.Collections.Generic;
 using Models;
+using DL;
 
 namespace UI
 {
@@ -29,6 +30,7 @@ namespace UI
             Console.WriteLine("[0] View All Products");
             Console.WriteLine("[1] See other store locations");
             Console.WriteLine("[2] Recommend an Item we should stock");
+            // Console.WriteLine("[3] Go to shop menu");
             Console.WriteLine("[x] Go Back to Main Menu"); 
 
             switch (Console.ReadLine())
@@ -43,6 +45,9 @@ namespace UI
                 case "2":
                     Console.WriteLine("What movie do you recommend?");
                     break;
+                // case "3":
+                //     new ShopMenu(new BL(new FileRepo())).Start();
+                //     break;
                 case "x":
                     Console.WriteLine("\nGoodBye!");
                     exit = true;
@@ -68,7 +73,7 @@ namespace UI
             {
                 foreach (Product prod in allProducts)
                 {
-                    Console.WriteLine(prod.ToString());
+                    Console.WriteLine("\nHere is a list of our Inventory:" + "\n\n " + prod.ToString());
                 }
 
             } 

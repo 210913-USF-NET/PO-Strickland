@@ -26,6 +26,8 @@ namespace UI
                     //return new AdminMenu(new BL(new FileRepo())); //no break statements because we are returning out of all of these options
                 case "register":
                     return new Registration(new BL(new FileRepo()));
+                case "login":
+                    return new loginMenu(new BL(new FileRepo()));
                 case "inventory":
                     return new InventoryMenu(new BL(new FileRepo()));
                 case "review":
