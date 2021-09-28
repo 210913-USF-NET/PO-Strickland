@@ -22,19 +22,24 @@ namespace UI
                 Console.WriteLine("Register at Lucky Disks\n");
                 Console.WriteLine("Name: ");
                 string name = Console.ReadLine();
+                
                 Console.WriteLine("Age: ");
                 string age = Console.ReadLine();
+                int parsedAge;
+                bool parseSuccess = Int32.TryParse(age, out parsedAge);
+
                 Console.WriteLine("Email Address: ");
                 string email = Console.ReadLine();
 
-                Customer newCustomer = new Customer(name, age, email);
+                Customer newCustomer = new Customer(name, parsedAge, email);
                 AddCustomer(newCustomer);
                 Console.WriteLine($"\n\nYou are registered as: {newCustomer.ToString()}");
         }
 
         private void AddCustomer(Customer cust){// added with the help of nick
 
-            _bl.AddCustomer(cust); //will transfer info to bl in next layer 
+            Customer addedCustomer = _bl.AddCustomer(cust); //will transfer info to bl in next layer 
+            
         }
     }
 }

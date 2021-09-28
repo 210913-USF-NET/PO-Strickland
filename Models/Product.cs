@@ -23,12 +23,12 @@ namespace Models
         }
 
         //constructor chaining : behaves this way when a age is passed in 
-        public Product(string name, string price) : this(name)
+        public Product(string name, int price) : this(name)
         {
             this.Price = price;
         }
 
-        public Product(string name, string price, string genre) : this(name, price)
+        public Product(string name, int price, string genre) : this(name, price)
         {
             this.Genre = genre;
         }
@@ -38,7 +38,7 @@ namespace Models
         //     this.Quantity = quantity;
         // }
 
-        public Product(string name, string price, string genre, int quantity) : this(name, price, genre)
+        public Product(string name, int price, string genre, int quantity) : this(name, price, genre)
         {
             this.Quantity = quantity;
         }
@@ -47,7 +47,7 @@ namespace Models
         public string Name { get; set; }
         
 
-        public string Price { get; set; } //decimal is a data type that makes things line up exactly like money
+        public int Price { get; set; } //decimal is a data type that makes things line up exactly like money
 
         public string Genre { get; set; }
 
@@ -74,7 +74,7 @@ namespace Models
         } //this compares two products.. it compares if it is the same object in the heap
 
         public override string ToString(){
-            return $"Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.Quantity}";
+            return $"Id: {this.ProductId} Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.Quantity}";
         }
     }
 }

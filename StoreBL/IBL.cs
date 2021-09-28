@@ -8,18 +8,18 @@ namespace StoreBL
     //******************************************************************
         List<StoreFront> GetAllStoreFronts();
 
-        void AddStoreFront(StoreFront loc);
+        StoreFront AddStoreFront(StoreFront loc);
     //******************************************************************
 
     //******************************************************************
         List<Customer> GetAllCustomers(); //change if doesnt work 
 
-        void AddCustomer(Customer cust); //added with the help of nick 
+        Customer AddCustomer(Customer cust); //added with the help of nick 
 
     //*******************************************************************
         List<Product> GetAllProducts();
 
-        void AddProduct(Product prod);
+        Product AddProduct(Product prod);
     //********************************************************************
 
         Product UpdateProduct(Product productToUpdate );

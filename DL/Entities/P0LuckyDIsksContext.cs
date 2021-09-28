@@ -17,11 +17,24 @@ namespace DL.Entities
         {
         }
 
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<StoreFront> StoreFronts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.Property(e => e.Email)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Product>(entity =>
             {
@@ -34,9 +47,16 @@ namespace DL.Entities
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
 
-                entity.Property(e => e.Price)
-                    .HasMaxLength(50)
+            modelBuilder.Entity<StoreFront>(entity =>
+            {
+                entity.Property(e => e.Address)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
 
@@ -44,14 +64,5 @@ namespace DL.Entities
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public partial class Product
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Price { get; set; }
-        public string Genre { get; set; }
-        public int Quantity { get; set; }
-    }
     }
 }

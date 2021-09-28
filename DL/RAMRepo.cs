@@ -33,7 +33,7 @@ namespace DL
                 new Customer()
                 {
                     Name = "Trey",
-                    Age = "30",
+                    Age = 30,
                     Email = "ctstrick61@gmail.com"
                 }
             };
@@ -42,7 +42,7 @@ namespace DL
                 new Product()
                 {
                     Name = "It",
-                    Price = "9.99",
+                    Price = 10,
                     Genre = "Horror",
                     //Quantity = "15"
                     Quantity = 15

@@ -17,9 +17,9 @@ namespace StoreBL //never have the namespace title the same as the public class 
             _repo = repo;
         }
         //*********************************************************
-        public void AddStoreFront(StoreFront loc)
+        public StoreFront AddStoreFront(StoreFront loc)
         {
-            _repo.AddStoreFront(loc);
+            return _repo.AddStoreFront(loc);
 
         }
         public List<StoreFront> GetAllStoreFronts()
@@ -30,11 +30,24 @@ namespace StoreBL //never have the namespace title the same as the public class 
 
         //**********************************************************
 
-        public void AddCustomer(Customer cust)
+        public Customer AddCustomer(Customer cust)
         { //added with the help of nick 
 
-            _repo.AddCustomer(cust); // going to DL
+            return _repo.AddCustomer(cust); // going to DL
         }
+
+
+        public Product AddProduct(Product prod)
+        {
+
+            return _repo.AddProduct(prod); // going to DL
+        }
+
+        // public void AddStoreFront(StoreFront loc)
+        // { //added with the help of nick 
+
+        //     _repo.AddStoreFront(loc); // going to DL
+        // }
 
         public List<Customer> GetAllCustomers() //Change if doesnt work 
         {
@@ -42,12 +55,11 @@ namespace StoreBL //never have the namespace title the same as the public class 
         }
         //***********************************************************
 
-        public void AddProduct(Product prod)
-        { //added with the help of nick 
 
-            _repo.AddProduct(prod); // going to DL
-        }
+        //public Product AddProduct(Product prod) => _repo.AddProduct(prod); // going to DL
 
+
+        //*************************************************************
         public List<Product> GetAllProducts() //Change if doesnt work 
         {
             return _repo.GetAllProducts();
@@ -87,6 +99,8 @@ namespace StoreBL //never have the namespace title the same as the public class 
             _repo.AddLineItem(line);
 
         }
+
+        }
         // public List<LineItem> GetAllLineItems()
         // {
         //     return _repo.GetAllLineItems();
@@ -98,8 +112,3 @@ namespace StoreBL //never have the namespace title the same as the public class 
     when we actually implement the interface, we have to declare the
     access modifer, we have to have these as public. 
     */
-
-
-
-}
-

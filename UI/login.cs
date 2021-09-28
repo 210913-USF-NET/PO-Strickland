@@ -1,11 +1,11 @@
+using DL;
+using StoreBL;
+using DL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.IO; //to use file class
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Models;
-using StoreBL;
-using DL;
-using System.IO;
+
 
 
 
@@ -22,12 +22,16 @@ namespace UI
 
         public void Start()
         {
+        string connectionString = File.ReadAllText(@"../connectionString.txt");
+        DbContextOptions<P0LuckyDIsksContext> options = new DbContextOptionsBuilder<P0LuckyDIsksContext>()
+        .UseSqlServer(connectionString).Options;  
+        P0LuckyDIsksContext context = new P0LuckyDIsksContext(options);
 
             bool correct = false;
             string useremail;
             string response;
 
-            List<Customer> correctEmail = _bl.GetAllCustomers();
+            List<Models.Customer> correctEmail = _bl.GetAllCustomers();
 
             Console.WriteLine("To Sign in, please provide your registered email\n"); //assume an email is unique enough to log into a user account .. I know passwords are important too 
             Console.WriteLine("EMAIL: ");
@@ -37,7 +41,7 @@ namespace UI
 
                 if(useremail == correctEmail[i].Email){
                     Console.WriteLine("Welcome back!");
-                    new ShopMenu(new BL(new FileRepo())).Start();
+                    new ShopMenu(new BL(new DBRepo(context))).Start();
                     correct = true; // emails match, break out of this loop
                     break;
                 }

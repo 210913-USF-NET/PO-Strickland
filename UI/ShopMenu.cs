@@ -132,7 +132,11 @@ namespace UI
             Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
             Console.WriteLine($"Thank you for your purchase and your support!\nA confirmation email will be sent to {emailNow} along with a digit copy. \nPlease choose us again in the future!\n\n");
         }
-
+        
+        
+        
+        
+        //**********************************************************************************************************************************
         private void AddLineItem(LineItem line){// added with the help of nick
 
             _bl.AddLineItem(line); //will transfer info to bl in next layer 

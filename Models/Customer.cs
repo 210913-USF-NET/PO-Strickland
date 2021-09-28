@@ -17,12 +17,12 @@ namespace Models
         }
 
         //constructor chaining : behaves this way when a age is passed in 
-        public Customer(string name, string age) : this(name)
+        public Customer(string name, int age) : this(name)
         {
             this.Age = age;
         }
 
-        public Customer(string name, string age, string email) : this(name, age)
+        public Customer(string name, int age, string email) : this(name, age)
         {
             this.Email = email;
         }
@@ -30,7 +30,7 @@ namespace Models
         //Property
         public string Name { get; set; }
 
-        public string Age { get; set; }
+        public int Age { get; set; }
 
         public string Email { get; set; }
 

@@ -5,17 +5,27 @@ using System.Threading.Tasks;
 using Models;
 using StoreBL;
 using DL;
+using Microsoft.EntityFrameworkCore;
+using DL.Entities;
+using System.IO;
+
 
 namespace UI
 {
     public class AdminMenu : IMenu
     {
+        
         private IBL _bl;
         public AdminMenu(IBL bl){
             this._bl = bl;
         }
 
         public void Start(){
+
+        string connectionString = File.ReadAllText(@"../connectionString.txt");
+        DbContextOptions<P0LuckyDIsksContext> options = new DbContextOptionsBuilder<P0LuckyDIsksContext>()
+        .UseSqlServer(connectionString).Options;  
+        P0LuckyDIsksContext context = new P0LuckyDIsksContext(options);
 
 
             //string input = "";
@@ -40,10 +50,10 @@ namespace UI
                     Items();
                     break;
                 case "2":
-                    new ProductsMenu(new BL(new FileRepo())).Start();
+                    new ProductsMenu(new BL(new DBRepo(context))).Start();
                     break;
                 case "3":
-                    new StoreFrontMenu(new BL(new FileRepo())).Start();
+                    new StoreFrontMenu(new BL(new DBRepo(context))).Start();
                     break;
                 case "x":
                     Console.WriteLine("\nGoodBye!");
@@ -60,7 +70,7 @@ namespace UI
 
         private void Custs(){ //similar idea to what was used in RestaurantReviews projects
             
-            List<Customer> allCustomers = _bl.GetAllCustomers();
+            List<Models.Customer> allCustomers = _bl.GetAllCustomers();
 
             if(allCustomers.Count == 0)
             {
@@ -68,7 +78,7 @@ namespace UI
             }
             else
             {
-                foreach (Customer cust in allCustomers)
+                foreach (Models.Customer cust in allCustomers)
                 {
                     Console.WriteLine(cust.ToString());
                 }
@@ -77,7 +87,7 @@ namespace UI
 
         private void Items(){ //similar idea to what was used in RestaurantReviews projects
             
-            List<Product> allProducts = _bl.GetAllProducts();
+            List<Models.Product> allProducts = _bl.GetAllProducts();
 
             if(allProducts.Count == 0)
             {
@@ -85,7 +95,7 @@ namespace UI
             }
             else
             {
-                foreach (Product prod in allProducts)
+                foreach (Models.Product prod in allProducts)
                 {
                     Console.WriteLine(prod.ToString());
                 }

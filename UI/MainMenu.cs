@@ -1,7 +1,10 @@
-using System;
-using StoreBL;
-using Models;
 using DL;
+using StoreBL;
+using DL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.IO; //to use file class
+using System;
+
 
 
 namespace UI
@@ -17,6 +20,15 @@ namespace UI
 
         public void Start()
         {
+        string connectionString = File.ReadAllText(@"../connectionString.txt");
+        DbContextOptions<P0LuckyDIsksContext> options = new DbContextOptionsBuilder<P0LuckyDIsksContext>()
+        .UseSqlServer(connectionString).Options;  
+        P0LuckyDIsksContext context = new P0LuckyDIsksContext(options);
+
+
+
+
+
             bool exit = false; //bool variable to enter and exit the do-while loop 
             string input = ""; //default string variable to take in user input.. type checking
             do
@@ -34,7 +46,7 @@ namespace UI
                 {
                     case "Admin":
                         //MenuFactory.GetMenu("Admin").Start();
-                        new AdminMenu(new BL(new FileRepo())).Start();
+                        new AdminMenu(new BL(new DBRepo(context))).Start();
                         break;
 
                     case "0":

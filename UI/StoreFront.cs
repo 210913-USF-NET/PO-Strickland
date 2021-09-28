@@ -32,7 +32,7 @@ namespace UI
 
         private void AddStoreFront(StoreFront loc){// added with the help of nick
 
-            _bl.AddStoreFront(loc); //will transfer info to bl in next layer 
+           StoreFront addedStoreFront = _bl.AddStoreFront(loc); //will transfer info to bl in next layer 
         }
     }
 }
