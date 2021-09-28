@@ -45,7 +45,22 @@ namespace DL
 
         public Model.LineItem AddLineItem(Model.LineItem line)
         {
-            throw new NotImplementedException();
+            Entity.LineItem LineItemToAdd = new Entity.LineItem(){
+                Name = line.Name,
+                Quantity = line.Quantity,
+                Email = line.Email
+            }; 
+
+            LineItemToAdd = _context.LineItems.Add(LineItemToAdd).Entity;
+            _context.SaveChanges(); 
+            _context.ChangeTracker.Clear(); 
+
+            return new Model.LineItem(){
+                LineItemId = LineItemToAdd.Id,
+                Name = LineItemToAdd.Name,
+                Quantity = LineItemToAdd.Quantity,
+                Email = LineItemToAdd.Email
+            };
         }
 
         public Model.Product AddProduct(Model.Product prod)
@@ -96,6 +111,19 @@ namespace DL
                     Name = Customer.Name,
                     Age = Customer.Age,
                     Email = Customer.Email
+                    
+                }
+            ).ToList();
+        }
+
+        public List<Model.LineItem> GetAllLineItems()
+        {
+            return _context.LineItems.Select(
+                LineItem => new Model.LineItem(){
+                    LineItemId = LineItem.Id,
+                    Name = LineItem.Name,
+                    Quantity = LineItem.Quantity,
+                    Email = LineItem.Email
                     
                 }
             ).ToList();

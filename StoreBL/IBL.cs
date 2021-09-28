@@ -34,10 +34,9 @@ namespace StoreBL
         void AddOrder(Order ord); //added with the help of nick 
 
 
-        //List<LineItem> GetAllLineItems(); //change if doesnt work 
+        List<LineItem> GetAllLineItems(); //change if doesnt work 
 
-        void AddLineItem(LineItem line); //added with the help of nick 
-
+        LineItem AddLineItem(LineItem line); 
         
     }
 

@@ -16,7 +16,7 @@ namespace Models
         // }
         //public List<LineItem> LineItems { get; set; }
 
-        public string Name {get; set;}
+        public Product Name {get; set;}
 
         public string Email{get; set;}
 

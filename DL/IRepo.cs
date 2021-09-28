@@ -14,7 +14,7 @@ namespace DL
 
         List<Product> GetAllProducts();
 
-        //List<LineItem> GetAllLineItems();
+        List<LineItem> GetAllLineItems();
 
         Customer AddCustomer(Customer cust); // added with the help of nick 
 

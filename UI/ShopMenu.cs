@@ -56,7 +56,7 @@ namespace UI
         public void PlaceOrder(){
             string selectedMovie = "";
             string emailNow = "";
-            string numberSelected = "";
+            int numberSelected;
             
             Start:
             Console.WriteLine("Please confirm your email by re-entering: ");
@@ -65,7 +65,7 @@ namespace UI
 
             Console.WriteLine($"Thank you {emailNow} for your support in our store. Happy shopping!");
 
-            
+            continueShopping: 
             Console.WriteLine("Select a Movie to add to your cart");
 
             //below is how to pull a list of products already made 
@@ -101,9 +101,9 @@ namespace UI
                 Console.WriteLine("Select an Amount (5 is the max): ");
                 int userSelection;
                 bool success = int.TryParse(Console.ReadLine(), out userSelection);
-                //numberSelected = userSelection;
+                numberSelected = userSelection;
 
-                numberSelected = userSelection.ToString();
+                //numberSelected = userSelection.ToString();
 
                 LineItem newLineItem = new LineItem(selectedMovie, numberSelected, emailNow); //inheritance 
                 AddLineItem(newLineItem);
@@ -129,17 +129,51 @@ namespace UI
                 Console.WriteLine("Invalid Order");
                 goto Start;
             }
+
+            string x = "";
+            Console.WriteLine("Would you like to continue shopping? Y/N");
+            x = Console.ReadLine();
+
+            if (x == "Y"){
+                goto continueShopping;
+            }
+            else{
+
+            Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
+            Console.WriteLine("You Purchased: ");
+            List<LineItem> allLineItem = _bl.GetAllLineItems();
+
+            if(allLineItem.Count == 0)
+            {
+                Console.WriteLine("You made no purchase :/");
+            }
+            else
+            {
+                for(int i = 0; i < allLineItem.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {allLineItem[i]}");
+                /*
+                this will print out a list of products to review
+                */
+            }
+
+        
+
+
+
+
+
             Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
             Console.WriteLine($"Thank you for your purchase and your support!\nA confirmation email will be sent to {emailNow} along with a digit copy. \nPlease choose us again in the future!\n\n");
+        
+            }
+            }
         }
-        
-        
         
         
         //**********************************************************************************************************************************
         private void AddLineItem(LineItem line){// added with the help of nick
-
-            _bl.AddLineItem(line); //will transfer info to bl in next layer 
+            LineItem addedLineItem =_bl.AddLineItem(line); //will transfer info to bl in next layer 
         }
 
 
@@ -161,8 +195,11 @@ namespace UI
 
             } 
         }
+    
+        
     }
 }
+
     
 
         

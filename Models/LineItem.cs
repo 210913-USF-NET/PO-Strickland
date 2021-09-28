@@ -15,22 +15,24 @@ namespace Models
 
         public int ProductId  {get; set;}
 
+        public int LineItemId {get; set;}
+
         public LineItem(string name) : this(){
             this.Name = name;
         }
 
-        public LineItem(string name, string quantity) : this(name)
+        public LineItem(string name, int quantity) : this(name)
         {
             this.Quantity = quantity;
         }
 
-        public LineItem(string name, string quantity, string email) : this(name, quantity)
+        public LineItem(string name, int quantity, string email) : this(name, quantity)
         {
             this.Email = email;
         }
 
 
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
         public string Name {get; set;}
 

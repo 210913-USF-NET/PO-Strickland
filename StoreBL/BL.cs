@@ -94,20 +94,25 @@ namespace StoreBL //never have the namespace title the same as the public class 
         //     return;
         // }
 
-        public void AddLineItem(LineItem line)
+        public LineItem AddLineItem(LineItem line)
         {
-            _repo.AddLineItem(line);
+            return _repo.AddLineItem(line);
 
         }
 
+
+        public List<LineItem> GetAllLineItems()
+        {
+            return _repo.GetAllLineItems();
         }
-        // public List<LineItem> GetAllLineItems()
+
+        // public List<Product> GetAllProducts() //Change if doesnt work 
         // {
-        //     return _repo.GetAllLineItems();
+        //     return _repo.GetAllProducts();
         // }
 
     }
-
+}
     /*
     when we actually implement the interface, we have to declare the
     access modifer, we have to have these as public. 

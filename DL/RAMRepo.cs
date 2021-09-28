@@ -1,3 +1,4 @@
+   
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,9 +53,9 @@ namespace DL
             _line = new List<LineItem>(){
                 new LineItem(){
 
-                    Email = "ctstrick61@gmail.com",
                     Name = "IT",
-                    Quantity = "2"
+                    Quantity = 2,
+                    Email = "ctstrick61@gmail.com"
                 }
 
 

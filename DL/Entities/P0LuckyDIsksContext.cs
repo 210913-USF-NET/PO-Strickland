@@ -18,6 +18,7 @@ namespace DL.Entities
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<LineItem> LineItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<StoreFront> StoreFronts { get; set; }
 
@@ -26,6 +27,17 @@ namespace DL.Entities
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.Property(e => e.Email)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<LineItem>(entity =>
             {
                 entity.Property(e => e.Email)
                     .HasMaxLength(100)
