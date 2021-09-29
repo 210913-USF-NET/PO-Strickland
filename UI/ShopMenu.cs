@@ -30,7 +30,7 @@ namespace UI
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("[0] Explore Store");
                 Console.WriteLine("[1] Place Order");
-                // Console.WriteLine("[2] Check Out");
+                Console.WriteLine("[2] Check Out");
                 Console.WriteLine("[x] Go Back To Main Menu");
 
                 switch (Console.ReadLine())
@@ -41,9 +41,9 @@ namespace UI
                     case "1":
                         PlaceOrder();
                         break;
-                    // case "2":
-                    //     CheckOut();
-                    //     break;
+                    case "2":
+                        CheckOut();
+                        break;
                     case "x":
                         exit = true;
                         break;
@@ -103,6 +103,7 @@ namespace UI
                 bool success = int.TryParse(Console.ReadLine(), out userSelection);
                 numberSelected = userSelection;
 
+
                 //numberSelected = userSelection.ToString();
 
                 LineItem newLineItem = new LineItem(selectedMovie, numberSelected, emailNow); //inheritance 
@@ -139,28 +140,32 @@ namespace UI
             }
             else{
 
-            Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
+            // Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
             Console.WriteLine("You Purchased: ");
-            List<LineItem> allLineItem = _bl.GetAllLineItems();
+            List<LineItem> newLineItem = _bl.GetAllLineItems();
 
-            if(allLineItem.Count == 0)
+            if(newLineItem.Count == 0)
             {
                 Console.WriteLine("You made no purchase :/");
             }
             else
             {
-                for(int i = 0; i < allLineItem.Count; i++)
+                for(int i = 1; i < newLineItem.Count; i++) // set i equal to one so it won't read in the null
             {
-                Console.WriteLine($"[{i}] {allLineItem[i]}");
+                Console.WriteLine($"\n[{i}] {newLineItem[i]} \n____________________________");
+                
                 /*
                 this will print out a list of products to review
                 */
             }
 
-        
+            // List<Models.Product> Products = _bl.GetAllProducts();
+            //     if(Products.Id == selectedProduct.ProductId){
+            //         Models.Product productToChange = Products.Id;
+            //         productToChange.Quantity -= numberSelected;
 
-
-
+            //     }
+            //     Models.Product changedMovie = _bl.UpdateProduct(productToChange); 
 
 
             Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
@@ -195,8 +200,53 @@ namespace UI
 
             } 
         }
-    
-        
+
+        private void CheckOut()
+        {
+            List<Product> allProducts = _bl.GetAllProducts();
+            List<LineItem> allLineItems = _bl.GetAllLineItems();
+            int amt = 0;
+            for(int i = 0; i < allProducts.Count; i++){
+                for(int j = 0; j < allLineItems.Count; j++){
+                    if ( allProducts[i].Name == allLineItems[j].Name){
+                        amt = allProducts[i].Price;
+                        // amt += amt;
+                        break;
+                    }
+                }
+            Console.WriteLine($"Your price: {amt}");
+            }
+
+        }
+
+        // public Models.Product UpdateProduct(){
+
+        //     Console.WriteLine("Choose a Movie to change:");
+
+        //     List<Models.Product> Products = _bl.GetAllProducts();
+        //     for(int i = 0; i < Products.Count; i++){
+        //         Console.WriteLine($"[{i}] {Products[i]}");
+        //     }
+        //     int selectId = Int32.Parse(Console.ReadLine());
+        //     Models.Product productToChange = Products[selectId];
+
+        //     Change:
+        //     Console.WriteLine($"How many {productToChange} would you like to add? or take away? ");
+        //     try{
+        //         productToChange.Quantity += Int32.Parse(Console.ReadLine());
+        //     }
+        //     catch(System.FormatException){
+        //         Console.WriteLine("Please use a number");
+        //         goto Change;
+        //     }
+
+        //     Models.Product changedMovie = _bl.UpdateProduct(productToChange);
+
+        //     return changedMovie;
+
+        // }
+
+
     }
 }
 

@@ -38,7 +38,8 @@ namespace UI
             Console.WriteLine("[0] View Customers");
             Console.WriteLine("[1] View Inventory");
             Console.WriteLine("[2] Add Products");
-            Console.WriteLine("[3] Add Store Locations");
+            Console.WriteLine("[3] Change Products");
+            Console.WriteLine("[4] Add Store Locations");
             Console.WriteLine("[x] Go Back to Main Menu"); 
 
             switch (Console.ReadLine())
@@ -53,6 +54,9 @@ namespace UI
                     new ProductsMenu(new BL(new DBRepo(context))).Start();
                     break;
                 case "3":
+                    Change();
+                    break;
+                case "4":
                     new StoreFrontMenu(new BL(new DBRepo(context))).Start();
                     break;
                 case "x":
@@ -102,6 +106,33 @@ namespace UI
 
             }
             
+
+        }
+
+        public Models.Product Change(){
+
+            Console.WriteLine("Choose a Movie to change:");
+
+            List<Models.Product> Products = _bl.GetAllProducts();
+            for(int i = 0; i < Products.Count; i++){
+                Console.WriteLine($"[{i}] {Products[i]}");
+            }
+            int selectId = Int32.Parse(Console.ReadLine());
+            Models.Product productToChange = Products[selectId];
+
+            Change:
+            Console.WriteLine($"How many {productToChange} would you like to add? or take away? ");
+            try{
+                productToChange.Quantity += Int32.Parse(Console.ReadLine());
+            }
+            catch(System.FormatException){
+                Console.WriteLine("Please use a number");
+                goto Change;
+            }
+
+            Models.Product changedMovie = _bl.UpdateProduct(productToChange);
+
+            return changedMovie;
 
         }
 
