@@ -168,8 +168,8 @@ namespace UI
             //     Models.Product changedMovie = _bl.UpdateProduct(productToChange); 
 
 
-            Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
-            Console.WriteLine($"Thank you for your purchase and your support!\nA confirmation email will be sent to {emailNow} along with a digit copy. \nPlease choose us again in the future!\n\n");
+            //Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
+            Console.WriteLine($"Thank you for your purchase and your support!\nA confirmation email will be sent to {emailNow} along with a digit copy.\n\n");
         
             }
             }
@@ -203,48 +203,23 @@ namespace UI
 
         private void CheckOut()
         {
+            
             List<Product> allProducts = _bl.GetAllProducts();
-            List<LineItem> allLineItems = _bl.GetAllLineItems();
+            List<LineItem> newLineItems = _bl.GetAllLineItems();
             int amt = 0;
-            for(int i = 0; i < allProducts.Count; i++){
-                for(int j = 0; j < allLineItems.Count; j++){
-                    if ( allProducts[i].Name == allLineItems[j].Name){
+            int total = 0;
+            for(int i = 0; i < newLineItems.Count; i++){
+                for(int j = 0; j < allProducts.Count; j++){
+                    if ( newLineItems[i].Name == allProducts[j].Name){
                         amt = allProducts[i].Price;
-                        // amt += amt;
+                        total = total + amt;
                         break;
                     }
                 }
-            Console.WriteLine($"Your price: {amt}");
             }
+            Console.WriteLine($"\nYour price: {total}\nThank you and please choose us again in the future!\n");
 
         }
-
-        // public Models.Product UpdateProduct(){
-
-        //     Console.WriteLine("Choose a Movie to change:");
-
-        //     List<Models.Product> Products = _bl.GetAllProducts();
-        //     for(int i = 0; i < Products.Count; i++){
-        //         Console.WriteLine($"[{i}] {Products[i]}");
-        //     }
-        //     int selectId = Int32.Parse(Console.ReadLine());
-        //     Models.Product productToChange = Products[selectId];
-
-        //     Change:
-        //     Console.WriteLine($"How many {productToChange} would you like to add? or take away? ");
-        //     try{
-        //         productToChange.Quantity += Int32.Parse(Console.ReadLine());
-        //     }
-        //     catch(System.FormatException){
-        //         Console.WriteLine("Please use a number");
-        //         goto Change;
-        //     }
-
-        //     Models.Product changedMovie = _bl.UpdateProduct(productToChange);
-
-        //     return changedMovie;
-
-        // }
 
 
     }
