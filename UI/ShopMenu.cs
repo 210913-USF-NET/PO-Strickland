@@ -109,6 +109,7 @@ namespace UI
                 LineItem newLineItem = new LineItem(selectedMovie, numberSelected, emailNow); //inheritance 
                 AddLineItem(newLineItem);
 
+
                 if(!success) {
                     Console.WriteLine("invalid input");
                     goto checkout;
@@ -160,7 +161,7 @@ namespace UI
             }
 
             // List<Models.Product> Products = _bl.GetAllProducts();
-            //     if(Products.Id == selectedProduct.ProductId){
+            //     if(Products.Id == LineItem.ProductId){
             //         Models.Product productToChange = Products.Id;
             //         productToChange.Quantity -= numberSelected;
 
@@ -170,6 +171,8 @@ namespace UI
 
             //Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
             Console.WriteLine($"Thank you for your purchase and your support!\nA confirmation email will be sent to {emailNow} along with a digit copy.\n\n");
+
+            
         
             }
             }
@@ -221,6 +224,41 @@ namespace UI
 
         }
 
+        
+        // public Models.Product UpdateProduct(){
+
+        //     //Console.WriteLine("Choose a Movie to change:");
+
+        //     List<LineItems> LineItems = _bl.GetAllLineItems();
+        //     for(int i = 0; i < LineItems.Count; i++){
+        //         Console.WriteLine($"[{i}] {LineItems[i]}");
+        //     }
+        //     int selectId = Int32.Parse(Console.ReadLine());
+        //     Models.Product productToChange = LineItems[selectId];
+
+        //     Change:
+        //     Console.WriteLine($"How many {productToChange} would you like to add? or take away? ");
+        //     try{
+        //         productToChange.Quantity += Int32.Parse(Console.ReadLine());
+        //     }
+        //     catch(System.FormatException){
+        //         Console.WriteLine("Please use a number");
+        //         goto Change;
+        //     }
+
+        //     Models.Product changedMovie = _bl.UpdateProduct(productToChange);
+
+        //     return changedMovie;
+
+        // }
+
+        // private void LineItem(LineItem line){// added with the help of nick
+
+        //     //_bl.AddProduct(prod); //will transfer info to bl in next layer  
+
+        //     LineItem addedProduct = _bl.AddProduct(prod); //will transfer info to bl in next layer 
+        //     Console.WriteLine($"You created {addedProduct}"); 
+        // }
 
     }
 }
