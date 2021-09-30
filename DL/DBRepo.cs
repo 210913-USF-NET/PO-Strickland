@@ -203,49 +203,36 @@ namespace DL
             return line;
         }
 
-        // public List<Models.OrderDetails> CustomerOrderHistory()
-        // {
-        //     return _context.Orderitems.Where(order => order.CustomerId == Models.CurrentContext.CurrentCustomerId).Select(Orderhistory => new Model.OrderDetails(){
-        //             Id = Orderhistory.Id,
-        //             CustomerId = Orderhistory.CustomerId,
-        //             StoreId = Orderhistory.StoresId,
-        //             Date = Orderhistory.Date
-        //         }
-        //     ).ToList();
-        // }
+        public List<Models.PlacedOrder> CustOrderHist()
+        {
+            return _context.Orders.Where(order => order.CustomersId == Models.Customer.update).Select(old => new Model.PlacedOrder(){
+                    Id = old.Id,
+                    CustomerId = old.CustomersId,
+                    StoreFrontId = old.StoreFrontId
+                }
+            ).ToList();
+        }
 
-        // public List <Models.Order> OrderHistory()
-        // {
-        //     return _context.Orderitems.Where(order => order.StoresId == Models.CurrentContext.CurrentStoreId).Select(Orderhistory => new Model.OrderDetails(){
-        //             Id = Orderhistory.Id,
-        //             CustomerId = Orderhistory.CustomerId,
-        //             StoreId = Orderhistory.StoresId,
-        //             Date = Orderhistory.Date
-        //         }
-        //     ).ToList();
-        // }
+        public List <Models.Order> OrderHistory()
+        {
+            return _context.Orders.Where(order => order.StoreFrontId == Models.StoreFront.update).Select(old => new Model.Order(){
+                    Id = old.Id,
+                    CustomersId = old.CustomersId,
+                    StoreFrontId = old.StoreFrontId
+            }
+            ).ToList();
+        }
 
-        // public List <Models.Customer> ListOfCustomers()
-        // {
-        //     return _context.Customers.Select(
-        //         Cuss => new Model.Customer(){
-        //             Name = Custs.Username,
-        //             Id = Custs.Id
-        //         }
-        //     ).ToList();
-        // }
-
-        // public Model.OrderDetails CreateNewOrder(Models.OrderDetails order)
-        // {
-        //     Entity.Orderitem toAdd = new Entity.Orderitem();
-        //     toAdd.CustomerId = order.CustomerId;
-        //     toAdd.StoresId = order.StoreId;
-        //     toAdd.Date = order.Date;
-        //     toAdd = _context.Orderitems.Add(toAdd).Entity;
-        //     _context.SaveChanges();
-        //     order.Id = toAdd.Id;
-        //     return order;
-        // }
+        public Model.PlacedOrder PlaceOrder(Models.PlacedOrder finalorder)
+        {
+            Entity.Order toAdd = new Entity.Order();
+            toAdd.CustomersId = finalorder.CustomerId;
+            toAdd.StoreFrontId = finalorder.StoreFrontId;
+            toAdd = _context.Orders.Add(toAdd).Entity;
+            _context.SaveChanges();
+            finalorder.Id = toAdd.Id;
+            return finalorder;
+        }
 
         public List <Models.StoreFront> StoreLocation()
         {
@@ -259,7 +246,5 @@ namespace DL
             ).ToList();
 
         }
-
-        
-        }
     }
+}

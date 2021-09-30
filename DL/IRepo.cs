@@ -23,12 +23,13 @@ namespace DL
 
         LineItem AddLineItem(LineItem line);
 
+        PlacedOrder PlaceOrder(PlacedOrder order);
+
 
         Product UpdateProduct(Product productToUpdate);
 
         Customer loginCustomer(Customer cust);
 
-        //OrderDetails CreateNewOrder(OrderDetails order);
 
         // Order AddOrder (Order ord);
 

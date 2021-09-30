@@ -46,24 +46,24 @@ namespace DL.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Inventories)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Inventory__Produ__662B2B3B");
+                    .HasConstraintName("FK__Inventory__Produ__7849DB76");
             });
 
             modelBuilder.Entity<LineItem>(entity =>
             {
                 entity.Property(e => e.ItemQuantity).HasColumnName("Item_Quantity");
 
-                entity.Property(e => e.ProductId).HasColumnName("Product_Id");
-
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__LineItems__Produ__6AEFE058");
+                    .HasConstraintName("FK__LineItems__Produ__7B264821");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.CustomersId).HasColumnName("Customers_Id");
+
+                entity.Property(e => e.StoreFrontId).HasColumnName("StoreFrontID");
 
                 entity.Property(e => e.TotalAmount).HasColumnName("Total_amount");
 
@@ -71,13 +71,19 @@ namespace DL.Entities
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomersId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Orders__Customer__6DCC4D03");
+                    .HasConstraintName("FK__Orders__Customer__05A3D694");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Orders__ProductI__6EC0713C");
+                    .HasConstraintName("FK__Orders__ProductI__0697FACD");
+
+                entity.HasOne(d => d.StoreFront)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.StoreFrontId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Orders__StoreFro__078C1F06");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -108,7 +114,7 @@ namespace DL.Entities
                 entity.HasOne(d => d.Inventory)
                     .WithMany(p => p.StoreFronts)
                     .HasForeignKey(d => d.InventoryId)
-                    .HasConstraintName("FK__StoreFron__Inven__719CDDE7");
+                    .HasConstraintName("FK__StoreFron__Inven__7E02B4CC");
             });
 
             OnModelCreatingPartial(modelBuilder);
