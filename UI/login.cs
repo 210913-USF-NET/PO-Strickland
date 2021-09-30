@@ -43,7 +43,7 @@ namespace UI
                     Console.WriteLine("Welcome back!");
                     // new ShopMenu(new BL(new DBRepo(context))).Start();
                     // correct = true; // emails match, break out of this loop
-                    // break;
+                    break;
                 }
             }
 

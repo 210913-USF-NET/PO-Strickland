@@ -32,7 +32,7 @@ namespace UI
 
             Console.WriteLine("\nWelcome to My Store!");
             StoreFront myStore = new StoreFront(){
-                Name = "Lucky Disks",
+                StoreFrontName = "Lucky Disks",
                 Address = "2400 Elders Rd, Charlotte, NC\n"
             };
             Console.WriteLine(myStore.ToString());
