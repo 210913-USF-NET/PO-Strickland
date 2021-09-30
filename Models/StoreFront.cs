@@ -9,7 +9,7 @@ namespace Models
         }
 
         public StoreFront(string name) : this(){
-            this.Name = name;
+            this.StoreFrontName = name;
         }
 
         public StoreFront(string name, string address) : this(name)
@@ -18,21 +18,23 @@ namespace Models
         }
         
 
-        public string Name { get; set; }
+        public string StoreFrontName { get; set; }
         public string Address { get; set; }
 
         public int StoreFrontId {get; set;}
+
+        public static int update {get; set;}
         
 
         public List<Inventory> Inventories { get; set; }
 
         public override string ToString()
         {
-            return $"\nStoreFront: {this.Name} \nAddress: {this.Address}";
+            return $"\nStoreFront: {this.StoreFrontName} \nAddress: {this.Address}";
         }
 
         public bool Equals(StoreFront loc){
-            return this.Name == loc.Name && this.Address == loc.Address;
+            return this.StoreFrontName == loc.StoreFrontName && this.Address == loc.Address;
         }
 
 

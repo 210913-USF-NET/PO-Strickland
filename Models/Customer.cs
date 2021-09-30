@@ -35,6 +35,7 @@ namespace Models
         public string Email { get; set; }
 
         public int Id {get; set;}
+        public static int update {get; set;}
 
         public List<Order> Orders { get; set; } //customers owns this order class
         

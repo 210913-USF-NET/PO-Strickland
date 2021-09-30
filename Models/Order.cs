@@ -51,6 +51,10 @@ namespace Models
         //     this.Product = new List<Product>();
         // }
         public int OrderId {get; set;}
-        public int CustomersId { get; set; }
+
+        public int Id { get; set; }
+        public int? CustomersId { get; set; }
+        public int? ProductId { get; set; }
+        public int? StoreFrontId { get; set; }
     }
 }
