@@ -35,3 +35,5 @@ Age: 33
 email: cldinares@gmail.com
 2021-09-25 19:08:32.251 -04:00 [INF] Application Starting..
 2021-09-25 19:08:41.193 -04:00 [INF] Application closing..
+2021-09-25 19:09:24.792 -04:00 [INF] Application Starting..
+2021-09-25 19:09:36.937 -04:00 [INF] Application closing..

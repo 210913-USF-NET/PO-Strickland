@@ -41,9 +41,9 @@ namespace UI
 
                 if(useremail == correctEmail[i].Email){
                     Console.WriteLine("Welcome back!");
-                    new ShopMenu(new BL(new DBRepo(context))).Start();
-                    correct = true; // emails match, break out of this loop
-                    break;
+                    // new ShopMenu(new BL(new DBRepo(context))).Start();
+                    // correct = true; // emails match, break out of this loop
+                    // break;
                 }
             }
 

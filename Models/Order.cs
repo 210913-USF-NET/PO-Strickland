@@ -16,9 +16,6 @@ namespace Models
         // }
         //public List<LineItem> LineItems { get; set; }
 
-        public Product Name {get; set;}
-
-        public string Email{get; set;}
 
         public List <LineItem> LineItems {get; set;}
 
@@ -43,7 +40,7 @@ namespace Models
         }
 
 
-        public decimal Total { get; set; }
+        public int? TotalAmount { get; set; }
 
         // public override string ToString(){
         //     return $"Total Price: {this.Total}\n";
@@ -54,6 +51,6 @@ namespace Models
         //     this.Product = new List<Product>();
         // }
         public int OrderId {get; set;}
-        public int Customerid {get; set;}
+        public int CustomersId { get; set; }
     }
 }

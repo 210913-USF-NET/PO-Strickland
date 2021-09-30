@@ -19,6 +19,7 @@ namespace DL.Entities
 
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<LineItem> LineItems { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<StoreFront> StoreFronts { get; set; }
 
@@ -39,13 +40,31 @@ namespace DL.Entities
 
             modelBuilder.Entity<LineItem>(entity =>
             {
-                entity.Property(e => e.Email)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.ItemQuantity).HasColumnName("Item_Quantity");
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.ProductId).HasColumnName("Product_Id");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.LineItems)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK__LineItems__Produ__2739D489");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.Property(e => e.CustomersId).HasColumnName("Customers_Id");
+
+                entity.Property(e => e.TotalAmount).HasColumnName("Total_amount");
+
+                entity.HasOne(d => d.Customers)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.CustomersId)
+                    .HasConstraintName("FK__Orders__Customer__17F790F9");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK__Orders__ProductI__18EBB532");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -59,6 +78,8 @@ namespace DL.Entities
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.StoreQuantity).HasColumnName("Store_Quantity");
             });
 
             modelBuilder.Entity<StoreFront>(entity =>

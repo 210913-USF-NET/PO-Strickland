@@ -46,9 +46,8 @@ namespace DL
         public Model.LineItem AddLineItem(Model.LineItem line)
         {
             Entity.LineItem LineItemToAdd = new Entity.LineItem(){
-                Name = line.Name,
-                Quantity = line.Quantity,
-                Email = line.Email
+                ItemQuantity = line.ItemQuantity
+                
             }; 
 
             LineItemToAdd = _context.LineItems.Add(LineItemToAdd).Entity;
@@ -57,9 +56,7 @@ namespace DL
 
             return new Model.LineItem(){
                 LineItemId = LineItemToAdd.Id,
-                Name = LineItemToAdd.Name,
-                Quantity = LineItemToAdd.Quantity,
-                Email = LineItemToAdd.Email
+                ItemQuantity = LineItemToAdd.ItemQuantity
             };
         }
 
@@ -69,7 +66,7 @@ namespace DL
                 Name = prod.Name,
                 Price = prod.Price,
                 Genre = prod.Genre,
-                Quantity = prod.Quantity
+                StoreQuantity = prod.StoreQuantity
             }; 
 
             productToAdd = _context.Products.Add(productToAdd).Entity;
@@ -81,7 +78,7 @@ namespace DL
                 Name = productToAdd.Name,
                 Price = productToAdd.Price,
                 Genre = productToAdd.Genre,
-                Quantity = productToAdd.Quantity
+                StoreQuantity = productToAdd.StoreQuantity
             };
         }
 
@@ -121,10 +118,7 @@ namespace DL
             return _context.LineItems.Select(
                 LineItem => new Model.LineItem(){
                     LineItemId = LineItem.Id,
-                    Name = LineItem.Name,
-                    Quantity = LineItem.Quantity,
-                    Email = LineItem.Email
-                    
+                    ItemQuantity = LineItem.ItemQuantity
                 }
             ).ToList();
         }
@@ -138,11 +132,10 @@ namespace DL
                     Name = Product.Name,
                     Price = Product.Price,
                     Genre = Product.Genre,
-                    Quantity = Product.Quantity
+                    StoreQuantity = Product.StoreQuantity
                 }
             ).ToList();
         }
-            
             
         public List<StoreFront> GetAllStoreFronts()
         {
@@ -155,34 +148,105 @@ namespace DL
             ).ToList();
         }
         
-
-
         public Product UpdateProduct(Product productToUpdate)
         {
-            throw new NotImplementedException();
+            {
+            Entity.Product updatedProduct = (from b in _context.Products
+                                        where b.Id == productToUpdate.ProductId
+                                        select b).SingleOrDefault();
+
+            updatedProduct.StoreQuantity = productToUpdate.StoreQuantity;
+
+            Product newerProduct = new Models.Product(){
+                ProductId = updatedProduct.Id,
+                Name = updatedProduct.Name,
+                Price = updatedProduct.Price,
+                StoreQuantity = updatedProduct.StoreQuantity
+                //BreweryId = updatedBrew.BreweryId,
+            };
+
+            _context.SaveChanges();
+
+            _context.ChangeTracker.Clear();
+
+            return newerProduct;
+            
+        }
         }
 
         public Customer loginCustomer(Customer cust)
         {
             throw new NotImplementedException();
         }
+        public List<Models.Product> ListOfProducts()
+        {
+            return _context.Products.Select(
+                Product => new Model.Product() {
+    
+                    Name = Product.Name,
+                    Price = Product.Price
+                    
+                }
+            ).ToList();
 
-        // ToList();
-        // }
+        }
 
-        // public List<Model.StoreFront> GetAllStoreFronts()
+
+        public Model.LineItem CheckOutList(Models.LineItem line)
+        {
+            Entity.LineItem toAdd = new Entity.LineItem();
+            toAdd.ItemQuantity = line.ItemQuantity;
+            toAdd.ProductId = line.ProductId;
+            toAdd = _context.LineItems.Add(toAdd).Entity;
+            _context.SaveChanges();
+            line.Id = toAdd.Id;
+            return line;
+        }
+
+        // public List<Models.OrderDetails> CustomerOrderHistory()
         // {
-        //     throw new NotImplementedException();
+        //     return _context.Orderitems.Where(order => order.CustomerId == Models.CurrentContext.CurrentCustomerId).Select(Orderhistory => new Model.OrderDetails(){
+        //             Id = Orderhistory.Id,
+        //             CustomerId = Orderhistory.CustomerId,
+        //             StoreId = Orderhistory.StoresId,
+        //             Date = Orderhistory.Date
+        //         }
+        //     ).ToList();
         // }
 
-        // public Model.Customer loginCustomer(Model.Customer cust)
+        // public List <Models.Order> OrderHistory()
         // {
-        //     throw new NotImplementedException();
+        //     return _context.Orderitems.Where(order => order.StoresId == Models.CurrentContext.CurrentStoreId).Select(Orderhistory => new Model.OrderDetails(){
+        //             Id = Orderhistory.Id,
+        //             CustomerId = Orderhistory.CustomerId,
+        //             StoreId = Orderhistory.StoresId,
+        //             Date = Orderhistory.Date
+        //         }
+        //     ).ToList();
         // }
 
-        // public Model.Product UpdateProduct(Model.Product productToUpdate)
+        // public List <Models.Customer> ListOfCustomers()
         // {
-        //     throw new NotImplementedException();
+        //     return _context.Customers.Select(
+        //         Cuss => new Model.Customer(){
+        //             Name = Custs.Username,
+        //             Id = Custs.Id
+        //         }
+        //     ).ToList();
         // }
+
+        // public Model.OrderDetails CreateNewOrder(Models.OrderDetails order)
+        // {
+        //     Entity.Orderitem toAdd = new Entity.Orderitem();
+        //     toAdd.CustomerId = order.CustomerId;
+        //     toAdd.StoresId = order.StoreId;
+        //     toAdd.Date = order.Date;
+        //     toAdd = _context.Orderitems.Add(toAdd).Entity;
+        //     _context.SaveChanges();
+        //     order.Id = toAdd.Id;
+        //     return order;
+        // }
+
+        
+        }
     }
-}

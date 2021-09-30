@@ -38,21 +38,21 @@ namespace Models
         //     this.Quantity = quantity;
         // }
 
-        public Product(string name, int price, string genre, int quantity) : this(name, price, genre)
+        public Product(string name, int price, string genre, int storequantity) : this(name, price, genre)
         {
-            this.Quantity = quantity;
+            this.StoreQuantity = storequantity;
         }
 
 
         public string Name { get; set; }
         
 
-        public int Price { get; set; } //decimal is a data type that makes things line up exactly like money
+        public int? Price { get; set; } //decimal is a data type that makes things line up exactly like money
 
         public string Genre { get; set; }
 
         //public int Quantity { get; set; }
-        public int Quantity {get; set;}
+        public int? StoreQuantity { get; set; }
         
 
         public int ProductId {get; set;}
@@ -70,11 +70,15 @@ namespace Models
         message. I am not sure why this make it work */ 
 
         public bool Equals(Product prod){
-            return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre && this.Quantity == prod.Quantity;
+            return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre && this.StoreQuantity == prod.StoreQuantity;
         } //this compares two products.. it compares if it is the same object in the heap
 
+        // public override string ToString(){
+        //     return $"Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.StoreQuantity}";
+        // }
+
         public override string ToString(){
-            return $"Id: {this.ProductId} Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.Quantity}";
+            return $"Id: {this.ProductId} Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.StoreQuantity}";
         }
     }
 }

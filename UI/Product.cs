@@ -16,9 +16,17 @@ namespace UI
             _bl = bl;
 
         }
+        // private readonly Random _random = new Random();  
+  
+        // // Generates a random number within a range.      
+        // public int RandomNumber(int min, int max)  
+        // {  
+        //     return _random.Next(min, max);  
+        // }
 
         public void Start()
         {   
+                // int id = _random.Next(100, 1000000);
                 //int totalQuantity;
                 Console.WriteLine("Products at Lucky Disks\n");
                 Console.WriteLine("Name: ");

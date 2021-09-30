@@ -123,7 +123,7 @@ namespace UI
             Change:
             Console.WriteLine($"How many {productToChange} would you like to add? or take away? ");
             try{
-                productToChange.Quantity += Int32.Parse(Console.ReadLine());
+                productToChange.StoreQuantity += Int32.Parse(Console.ReadLine());
             }
             catch(System.FormatException){
                 Console.WriteLine("Please use a number");

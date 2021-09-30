@@ -10,7 +10,6 @@ namespace DL
 
         List<Customer> GetAllCustomers();
 
-        // List<Review> GetAllReviews(); // can take out if necessary 
 
         List<Product> GetAllProducts();
 
@@ -24,15 +23,17 @@ namespace DL
 
         LineItem AddLineItem(LineItem line);
 
-        // Review AddReview(Review rev);
 
         Product UpdateProduct(Product productToUpdate);
 
         Customer loginCustomer(Customer cust);
 
+        //OrderDetails CreateNewOrder(OrderDetails order);
+
         // Order AddOrder (Order ord);
 
         // List<Order> GetAllOrders(Order ord);
+        //Customer SearchCustomer(string searchCustomer);
 
         }
     }
