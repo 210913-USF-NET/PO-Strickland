@@ -18,6 +18,7 @@ namespace DL.Entities
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<LineItem> LineItems { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -38,6 +39,16 @@ namespace DL.Entities
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Inventory>(entity =>
+            {
+                entity.ToTable("Inventory");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Inventories)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK__Inventory__Produ__662B2B3B");
+            });
+
             modelBuilder.Entity<LineItem>(entity =>
             {
                 entity.Property(e => e.ItemQuantity).HasColumnName("Item_Quantity");
@@ -47,7 +58,7 @@ namespace DL.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.LineItems)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__LineItems__Produ__2739D489");
+                    .HasConstraintName("FK__LineItems__Produ__6AEFE058");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -59,12 +70,14 @@ namespace DL.Entities
                 entity.HasOne(d => d.Customers)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomersId)
-                    .HasConstraintName("FK__Orders__Customer__17F790F9");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Orders__Customer__6DCC4D03");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Orders__ProductI__18EBB532");
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Orders__ProductI__6EC0713C");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -88,9 +101,14 @@ namespace DL.Entities
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.StoreFrontName)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Inventory)
+                    .WithMany(p => p.StoreFronts)
+                    .HasForeignKey(d => d.InventoryId)
+                    .HasConstraintName("FK__StoreFron__Inven__719CDDE7");
             });
 
             OnModelCreatingPartial(modelBuilder);

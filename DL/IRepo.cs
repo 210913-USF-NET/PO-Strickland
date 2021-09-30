@@ -34,6 +34,7 @@ namespace DL
 
         // List<Order> GetAllOrders(Order ord);
         //Customer SearchCustomer(string searchCustomer);
+        List <Models.StoreFront> StoreLocation();
 
         }
     }

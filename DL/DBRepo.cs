@@ -85,7 +85,7 @@ namespace DL
         public Model.StoreFront AddStoreFront(Model.StoreFront loc)
         {
             Entity.StoreFront storeFrontToAdd = new Entity.StoreFront(){
-                Name = loc.Name,
+                StoreFrontName = loc.StoreFrontName,
                 Address = loc.Address
             }; 
 
@@ -95,7 +95,7 @@ namespace DL
 
             return new Model.StoreFront(){
                 StoreFrontId = storeFrontToAdd.Id,
-                Name = storeFrontToAdd.Name,
+                StoreFrontName = storeFrontToAdd.StoreFrontName,
                 Address = storeFrontToAdd.Address
             };
         }
@@ -142,7 +142,7 @@ namespace DL
             return _context.StoreFronts.Select(
                 StoreFront => new Model.StoreFront(){
                     StoreFrontId = StoreFront.Id,
-                    Name = StoreFront.Name,
+                    StoreFrontName = StoreFront.StoreFrontName,
                     Address = StoreFront.Address
                 }
             ).ToList();
@@ -246,6 +246,19 @@ namespace DL
         //     order.Id = toAdd.Id;
         //     return order;
         // }
+
+        public List <Models.StoreFront> StoreLocation()
+        {
+            return _context.StoreFronts.Select(
+                StoreFronts => new Model.StoreFront() {
+    
+                    StoreFrontId = StoreFronts.Id,
+                    StoreFrontName = StoreFronts.StoreFrontName,
+                    Address = StoreFronts.Address
+                }
+            ).ToList();
+
+        }
 
         
         }
