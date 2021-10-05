@@ -18,4 +18,3 @@ namespace DL.Entities
         public virtual StoreFront Store { get; set; }
     }
 }
-
