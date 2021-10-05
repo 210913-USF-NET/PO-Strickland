@@ -26,7 +26,7 @@ namespace Models
         public static int update {get; set;}
         
 
-        public List<Inventory> Inventories { get; set; }
+        public List<Inventory> Inventory { get; set; }
 
         public override string ToString()
         {

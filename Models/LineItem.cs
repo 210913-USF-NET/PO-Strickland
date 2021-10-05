@@ -11,11 +11,13 @@ namespace Models
         }
         
         public int Id {get; set;}
-        public int OrderId {get; set;}
+        public int? OrderId {get; set;}
 
-        public int? ProductId  {get; set;}
+        public int ProductId  {get; set;}
 
         public int? LineItemId {get; set;}
+
+        public Product Item {get; set;}
 
         public LineItem(string name) : this(){
             this.Name = name;
@@ -33,7 +35,7 @@ namespace Models
 
         public string Name {get; set;}
 
-        
+        public int InventoryId{get; set;}
 
         public List<LineItem> LineItems { get; set; } 
 

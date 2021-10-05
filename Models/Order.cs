@@ -54,7 +54,7 @@ namespace Models
 
         public int Id { get; set; }
         public int? CustomersId { get; set; }
-        public int? ProductId { get; set; }
+        // public int? ProductId { get; set; }
         public int? StoreFrontId { get; set; }
     }
 }

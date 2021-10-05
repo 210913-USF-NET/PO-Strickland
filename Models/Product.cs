@@ -38,11 +38,6 @@ namespace Models
         //     this.Quantity = quantity;
         // }
 
-        public Product(string name, int price, string genre, int storequantity) : this(name, price, genre)
-        {
-            this.StoreQuantity = storequantity;
-        }
-
 
         public string Name { get; set; }
         
@@ -51,13 +46,14 @@ namespace Models
 
         public string Genre { get; set; }
 
-        //public int Quantity { get; set; }
+        //public int? Quantity { get; set; }
         public int? StoreQuantity { get; set; }
         
 
         public int ProductId {get; set;}
 
         public List<LineItem> LineItems { get; set; } //products own the lineItem
+        public List<Inventory> Inventory { get; set; }
 
 
         public List<Review> Reviews {get; set;} //just added
@@ -70,7 +66,7 @@ namespace Models
         message. I am not sure why this make it work */ 
 
         public bool Equals(Product prod){
-            return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre && this.StoreQuantity == prod.StoreQuantity;
+            return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre;
         } //this compares two products.. it compares if it is the same object in the heap
 
         // public override string ToString(){
@@ -78,7 +74,17 @@ namespace Models
         // }
 
         public override string ToString(){
-            return $"Id: {this.ProductId} Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}, Quantity: {this.StoreQuantity}";
+            return $"Id: {this.ProductId} Name: {this.Name}, Genre: {this.Genre}, Price: {this.Price}";
         }
+
+        public static implicit operator Product(int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        // public static implicit operator object(Product v)
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 }
