@@ -10,39 +10,38 @@ namespace Models
         public LineItem() {
         }
         
-
-        public int OrderId {get; set;}
+        public int Id {get; set;}
+        public int? OrderId {get; set;}
 
         public int ProductId  {get; set;}
 
-        public int LineItemId {get; set;}
+        public int? LineItemId {get; set;}
+
+        public Product Item {get; set;}
 
         public LineItem(string name) : this(){
             this.Name = name;
         }
 
-        public LineItem(string name, int quantity) : this(name)
+        public LineItem(string name, int itemquantity) : this(name)
         {
-            this.Quantity = quantity;
+            this.ItemQuantity = itemquantity;
         }
 
-        public LineItem(string name, int quantity, string email) : this(name, quantity)
-        {
-            this.Email = email;
-        }
+        
 
 
-        public int Quantity { get; set; }
+        public int? ItemQuantity { get; set; }
 
         public string Name {get; set;}
 
-        public string Email{get; set;}
+        public int InventoryId{get; set;}
 
         public List<LineItem> LineItems { get; set; } 
 
         public override string ToString()
         {
-            return $"\nMovie: {this.Name} \nAmount: {this.Quantity} \nEmail Confirmation: {this.Email}";
+            return $"\nMovie: {this.Name} \nAmount: {this.ItemQuantity}";
         }
         
 
