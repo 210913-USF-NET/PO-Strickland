@@ -32,14 +32,13 @@ namespace UI
 
             Console.WriteLine("\nWelcome to My Store!");
             StoreFront myStore = new StoreFront(){
-                Name = "Lucky Disks",
+                StoreFrontName = "Lucky Disks",
                 Address = "2400 Elders Rd, Charlotte, NC\n"
             };
             Console.WriteLine(myStore.ToString());
 
-            //MenuFactory.GetMenu("main").Start();
-            //new MainMenu(new BL(new FileRepo())).Start(); 
-            new MainMenu().Start();
+            MenuFactory.GetMenu("main").Start();
+            
             
             //main menu needs a instance of business logic 
 
