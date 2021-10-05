@@ -37,9 +37,8 @@ namespace UI
             };
             Console.WriteLine(myStore.ToString());
 
-            //MenuFactory.GetMenu("main").Start();
-            //new MainMenu(new BL(new FileRepo())).Start(); 
-            new MainMenu().Start();
+            MenuFactory.GetMenu("main").Start();
+            
             
             //main menu needs a instance of business logic 
 

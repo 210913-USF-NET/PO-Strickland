@@ -109,32 +109,34 @@ namespace UI
 
         }
 
-        public Models.Product Change(){
+        public Models.Inventory Change(){
 
             Console.WriteLine("Choose a Movie to change:");
 
-            List<Models.Product> Products = _bl.GetAllProducts();
-            for(int i = 0; i < Products.Count; i++){
-                Console.WriteLine($"[{i}] {Products[i]}");
+            List<Models.Inventory> ProductId = _bl.GetAllInventory();
+            for(int i = 0; i < ProductId.Count; i++){
+                Console.WriteLine($"[{i}] {ProductId[i]}");
             }
             int selectId = Int32.Parse(Console.ReadLine());
-            Models.Product productToChange = Products[selectId];
+            Models.Inventory productToChange = ProductId[selectId];
 
             Change:
             Console.WriteLine($"How many {productToChange} would you like to add? or take away? ");
             try{
-                productToChange.StoreQuantity += Int32.Parse(Console.ReadLine());
+                productToChange.Quantity += Int32.Parse(Console.ReadLine());
             }
             catch(System.FormatException){
                 Console.WriteLine("Please use a number");
                 goto Change;
             }
 
-            Models.Product changedMovie = _bl.UpdateProduct(productToChange);
+            Models.Inventory changedMovie = _bl.placeitems(productToChange);
 
             return changedMovie;
 
         }
+
+        
 
 }
 }

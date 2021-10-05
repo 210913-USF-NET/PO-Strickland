@@ -10,6 +10,7 @@ namespace UI
     public class Registration : IMenu
     {
         private IBL _bl; //added with the help of nick 
+        public static Customer currCust;
 
         public Registration (IBL bl){
 
@@ -32,13 +33,14 @@ namespace UI
                 string email = Console.ReadLine();
 
                 Customer newCustomer = new Customer(name, parsedAge, email);
-                AddCustomer(newCustomer);
-                Console.WriteLine($"\n\nYou are registered as: {newCustomer.ToString()}");
+                Customer addCustomer = _bl.AddCustomer(newCustomer);
+                currCust = addCustomer; 
+                Console.WriteLine($"\n\nYou are registered as: {currCust.ToString()}");
         }
 
-        private void AddCustomer(Customer cust){// added with the help of nick
+        private Customer AddCustomer(Customer currCust){// added with the help of nick
 
-            Customer addedCustomer = _bl.AddCustomer(cust); //will transfer info to bl in next layer 
+           return _bl.AddCustomer(currCust); //will transfer info to bl in next layer 
             
         }
     }

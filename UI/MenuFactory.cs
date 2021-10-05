@@ -1,4 +1,4 @@
-
+using System;
 using DL;
 using StoreBL;
 using DL.Entities;
@@ -27,7 +27,7 @@ namespace UI
             {
 
                 case "main":
-                    return new MainMenu();//new BL(new FileRepo()));
+                    return new MainMenu(new BL(new DBRepo(context)));//new BL(new FileRepo()));
                 //case "Admin":
                     //return new AdminMenu(new BL(new FileRepo())); //no break statements because we are returning out of all of these options
                 // case "Admin":
@@ -38,8 +38,8 @@ namespace UI
                     return new loginMenu(new BL(new DBRepo(context)));
                 case "inventory":
                     return new InventoryMenu(new BL(new DBRepo(context)));
-                case "review":
-                    return new ReviewMenu(new BL(new DBRepo(context)));
+                // case "review":
+                //     return new ReviewMenu(new BL(new DBRepo(context)));
                 default:
                     return null;
             }

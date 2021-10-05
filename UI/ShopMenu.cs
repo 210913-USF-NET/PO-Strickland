@@ -1,231 +1,309 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using Models;
-// using StoreBL;
-// using Serilog;
-// using DL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Models;
+using StoreBL;
+using Serilog;
+using DL;
 
-// namespace UI
-// {
-//     public class ShopMenu : IMenu
-//     {
-//         private IBL _bl;
+namespace UI
+{
+    public class ShopMenu : IMenu
+    {
+        private IBL _bl;
 
-//         public ShopMenu(IBL bl) //constructor with passing in an instance of business logic to create review menu
-//         {
-//             _bl = bl; //instance is saved in private field 
-//         }
+        public Customer currCust = Registration.currCust;
 
-//         public void Start()
-//         {
-//             LineItem newLineItem = new LineItem();
-//             AddLineItem(newLineItem);
+        public ShopMenu(IBL bl) //constructor with passing in an instance of business logic to create review menu
+        {
+            _bl = bl; //instance is saved in private field 
+        }
+        private StoreFront currStore;
+        private List<LineItem> line = new List<LineItem>(); //instead of cart, calling it line
+        private Order currentOrder;
+        //currentOrder = _bl.CreateCart(currCust.Id, currStore.StoreFrontId);
 
-//             bool exit = false;
-//             do
-//             {
-//                 Console.WriteLine("This is Lucky Disks Menu\n");
-//                 Console.WriteLine("What would you like to do?");
-//                 Console.WriteLine("[0] Explore Store");
-//                 Console.WriteLine("[1] Place Order");
-//                 Console.WriteLine("[2] Check Out");
-//                 Console.WriteLine("[x] Go Back To Main Menu");
+        public void Start()
+        {
+            currentOrder  = new Order();
+            currStore = SelectStoreFront();
+            LineItem newLineItem = new LineItem();
+            //List<LineItem> cartList = new List<LineItem> ();
+            //currentOrder = _bl.CreateCart(currCust.Id, currStore.StoreFrontId);
+            //AddLineItem(newLineItem);
+            currStore = _bl.GetStore(currStore.StoreFrontId);
+            Console.WriteLine($"Welcome to {currStore.StoreFrontName}");
+            List<Inventory> StoreInventory = _bl.ListInventoryByStore(currStore.StoreFrontId);
 
-//                 switch (Console.ReadLine())
-//                 {
-//                     case "0":
-//                         Items();
-//                     break;
-//                     case "1":
-//                         PlaceOrder();
-//                         break;
-//                     case "2":
-//                         CheckOut();
-//                         break;
-//                     case "x":
-//                         exit = true;
-//                         break;
-//                     default:
-//                         Console.WriteLine("What are you talking about");
-//                         break;
-//                 }
-//             } while(!exit);
-//         }
-//         public void PlaceOrder(){
-//             string selectedMovie = "";
-//             string emailNow = "";
-//             int numberSelected;
+            if(StoreInventory == null || StoreInventory.Count == 0){
+
+                Console.WriteLine("No Products Currently");
+                return;  
+            }
+
+            for(int i = 0; i < StoreInventory.Count; i++)
+            {
+                Console.WriteLine($"[{i}] Item: {StoreInventory[i].Item} Quantity: {StoreInventory[i].Quantity}");
+                Product product = _bl.GetAllProducts(StoreInventory[i].ProductId.GetValueOrDefault());
+                /*
+                this will print out a list of products to review
+                */
+            }
             
-//             Start:
-//             Console.WriteLine("Please confirm your email by re-entering: ");
+            bool exit = false;
+            do
+            {
+                Console.WriteLine("This is Lucky Disks Menu\n");
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("[0] Explore Store");
+                Console.WriteLine("[1] Choose StoreFront");
+                Console.WriteLine("[2] Place Order");
+                Console.WriteLine("[3] See Cart");
+                Console.WriteLine("[4] Check Out");
+                Console.WriteLine("[x] Go Back To Main Menu");
 
-//             emailNow = Console.ReadLine(); //potentially take out, do not need
+                switch (Console.ReadLine())
+                {
+                    case "0":
+                        Items();
+                    break;
+                    case "1":
+                        SelectStoreFront();
+                        break;
+                    case "2":
+                        PlaceOrder();
+                        break;
+                    case "3":
+                        Cart(currentOrder.LineItems);
+                        break;    
+                    case "4":
+                        CheckOut(currentOrder, currStore);
+                        break;
+                    case "x":
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("What are you talking about");
+                        break;
+                }
+            } while(!exit);
+        }
+        public void PlaceOrder(){
+            List<LineItem> cartList = new List<LineItem> ();
+            //currentOrder = _bl.CreateCart(currCust.Id, currStore.StoreFrontId);
+            string selectedMovie = "";
+            string emailNow = "";
+            int numberSelected;
+            
+            Start:
+            Console.WriteLine("Please confirm your email by re-entering: ");
 
-//             Console.WriteLine($"Thank you {emailNow} for your support in our store. Happy shopping!");
+            // emailNow = Console.ReadLine(); //potentially take out, do not need
 
-//             continueShopping: 
-//             Console.WriteLine("Select a Movie to add to your cart");
+            // Console.WriteLine($"Thank you {emailNow} for your support in our store. Happy shopping!");
 
-//             //below is how to pull a list of products already made 
+            continueShopping: 
+            Console.WriteLine("Select a Movie to add to your cart");
 
-//             List<Product> allProducts = _bl.GetAllProducts();
+            //below is how to pull a list of products already made 
 
-//             if(allProducts == null || allProducts.Count == 0){
+            List<Inventory> StoreInventory = _bl.ListInventoryByStore(currStore.StoreFrontId);
 
-//                 Console.WriteLine("No Products Currently");
-//                 return;  
-//             }
+            if(StoreInventory == null || StoreInventory.Count == 0){
 
-//             for(int i = 0; i < allProducts.Count; i++)
-//             {
-//                 Console.WriteLine($"[{i}] {allProducts[i]}");
-//                 /*
-//                 this will print out a list of products to review
-//                 */
-//             }
-//             string input = Console.ReadLine(); //readline brings in string. We want to convert string to int
-//             int parsedInput;
-//             bool parseSuccess = Int32.TryParse(input, out parsedInput);
+                Console.WriteLine("No Products Currently");
+                return;  
+            }
 
-//             if(parseSuccess && parsedInput >= 0 && parsedInput < allProducts.Count) 
-//             {
-//                 Product selectedProduct = allProducts[parsedInput];
-//                 Console.WriteLine($"You selected {selectedProduct.Name}"); 
-//                 selectedMovie = selectedProduct.Name;
+            for(int i = 0; i < StoreInventory.Count; i++)
+            {
+                Console.WriteLine($"[{i}] Item: {StoreInventory[i].Item} Quantity: {StoreInventory[i].Quantity}");
+                /*
+                this will print out a list of products to review
+                */
+            }
+            string input = Console.ReadLine(); //readline brings in string. We want to convert string to int
+            int parsedInput;
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
 
-
-//                 //Order OrderToAdd = new Order(); //empty constructor
-//                 checkout:
-//                 Console.WriteLine("Select an Amount (5 is the max): ");
-//                 int userSelection;
-//                 bool success = int.TryParse(Console.ReadLine(), out userSelection);
-//                 numberSelected = userSelection;
-
-
-//                 //numberSelected = userSelection.ToString();
+            if(parseSuccess && parsedInput >= 0 && parsedInput < StoreInventory.Count) 
+            {
+                Inventory selectedProduct = StoreInventory[parsedInput];
+                Console.WriteLine($"You selected {selectedProduct.Name}"); 
+                selectedMovie = selectedProduct.Item.Name;
 
 
 
-//                 LineItem newLineItem = new LineItem(selectedMovie, numberSelected); //inheritance 
-//                 AddLineItem(newLineItem);
+                //Order OrderToAdd = new Order(); //empty constructor
+                checkout:
+                Console.WriteLine("Select an Amount (5 is the max): ");
+                int userSelection;
+                bool success = int.TryParse(Console.ReadLine(), out userSelection);
+                numberSelected = userSelection;
 
-//                 if(!success) {
-//                     Console.WriteLine("invalid input");
-//                     goto checkout;
-//                 }
-//                 try{
-//                     //LineItem.ItemQuantity = userSelection; //this could throw an exception
-//                 }
-//                 catch(Exception e){
-//                     Console.WriteLine(e.Message);
-//                     goto checkout; //we caught the exception here
-//                 }
-//                 finally{
-//                     //put something here
-//                     //this get executed if successful or not
-//                     //use this to clean up resources such as Log.CloseAndFlush();
-//                 }
-//             }
-//             else{
-//                 Console.WriteLine("Invalid Order");
-//                 goto Start;
-//             }
 
-//             string x = "";
-//             Console.WriteLine("Would you like to continue shopping? Y/N");
-//             x = Console.ReadLine();
+                //numberSelected = userSelection.ToString();
 
-//             if (x == "Y"){
-//                 goto continueShopping;
-//             }
-//             else{
-
-//             // Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
-//             Console.WriteLine("You Purchased: ");
-//             List<LineItem> newLineItem = _bl.GetAllLineItems();
-
-//             if(newLineItem.Count == 0)
-//             {
-//                 Console.WriteLine("You made no purchase :/");
-//             }
-//             else
-//             {
-//                 for(int i = 1; i < newLineItem.Count; i++) // set i equal to one so it won't read in the null
-//             {
-//                 Console.WriteLine($"\n[{i}] {newLineItem[i]} \n______________________________________________");
+                LineItem newLineItem = new LineItem(selectedMovie, numberSelected); //inheritance 
+                newLineItem.ProductId = selectedProduct.Item.ProductId; 
+                newLineItem.Item = selectedProduct.Item;
+                newLineItem.InventoryId = selectedProduct.Id;
+                line.Add(newLineItem);
+                //AddLineItem(newLineItem);
                 
-//                 /*
-//                 this will print out a list of products to review
-//                 */
-//             }
 
-//             // List<Models.Product> Products = _bl.GetAllProducts();
-//             //     if(Products.Id == selectedProduct.ProductId){
-//             //         Models.Product productToChange = Products.Id;
-//             //         productToChange.Quantity -= numberSelected;
+                // if(!success) {
+                //     Console.WriteLine("invalid input");
+                //     goto checkout;
+                // }
+                // try{
+                //     //LineItem.ItemQuantity = userSelection; //this could throw an exception
+                // }
+                // catch(Exception e){
+                //     Console.WriteLine(e.Message);
+                //     goto checkout; //we caught the exception here
+                // }
+                // finally{
 
-//             //     }
-//             //     Models.Product changedMovie = _bl.UpdateProduct(productToChange); 
+                // }
+            }
+            else{
+                Console.WriteLine("Invalid Order");
+                goto Start;
+            }
 
+            string x = "";
+            Console.WriteLine("Would you like to continue shopping? Y/N");
+            x = Console.ReadLine();
 
-//             Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
-//             Console.WriteLine($"Thank you for your purchase and your support!\nA confirmation email will be sent to {emailNow} along with a digit copy. \nPlease choose us again in the future!\n\n");
-        
-//             }
-//             }
-//         }
-        
-        
-//         //**********************************************************************************************************************************
-//         private void AddLineItem(LineItem line){// added with the help of nick
-//             LineItem addedLineItem =_bl.AddLineItem(line); //will transfer info to bl in next layer 
-//         }
+            if (x == "Y"){
+                goto continueShopping;
+            }
+            else{
 
+            // Console.WriteLine($"\nYou purchased:\nMovie:{selectedMovie}\nAmount: {numberSelected}");
+            Console.WriteLine("You Purchased: ");
 
-//         private void Items(){ //similar idea to what was used in RestaurantReviews projects
+            if(line.Count == 0)
+            {
+                Console.WriteLine("You made no purchase :/");
+            }
+            else
+            {
+                for(int i = 0; i < line.Count; i++) // set i equal to one so it won't read in the null
+            {
+                Console.WriteLine($"\n[{i}] {line[i].Item} Quantity: {line[i].ItemQuantity} \n______________________________________________");
+                
+                /*
+                this will print out a list of products to review
+                */
+            }
+
+            currentOrder.CustomersId = currCust.CustomerId; //persisting to the database for orders
+            currentOrder.StoreFrontId = currStore.StoreFrontId;
+            currentOrder.LineItems = line; 
             
-//             List<Product> allProducts = _bl.GetAllProducts();
-//             Console.WriteLine("\nHere is a list of our Inventory:");
-
-//             if(allProducts.Count == 0)
-//             {
-//                 Console.WriteLine("New Orders are on the way");
-//             }
-//             else
-//             {
-//                 foreach (Product prod in allProducts)
-//                 {
-//                     Console.WriteLine("\n " + prod.ToString());
-//                 }
-
-//             } 
-//         }
-
-//         private void CheckOut()
-//         {
-//             List<Product> allProducts = _bl.GetAllProducts();
-//             List<LineItem> allLineItems = _bl.GetAllLineItems();
-//             int amt = 0;
-//             for(int i = 0; i < allProducts.Count; i++){
-//                 for(int j = 0; j < allLineItems.Count; j++){
-//                     if ( allProducts[i].Name == allLineItems[j].Name){
-//                         amt = (int)allProducts[i].Price;
-//                         // amt += amt;
-//                         break;
-//                     }
-//                 }
-//             Console.WriteLine($"Your price: {amt}");
-//             }
-
-//         }
+            _bl.PlaceOrder(currentOrder, currStore);
 
 
-//     }
-// }
+            // cartList.Add(selectItem(selectedMovie, currentOrder.Id));
+            // currentOrder.LineItems = cartList;
+            }
+            }
+        }
 
-    
+        private LineItem selectItem(string selectedMovie, int id)
+        {
+            throw new NotImplementedException();
+        }
 
-        
 
+        //**********************************************************************************************************************************
+        private void AddLineItem(LineItem line){// added with the help of nick
+            LineItem addedLineItem =_bl.AddLineItem(line); //will transfer info to bl in next layer 
+        }
+
+
+        private void Items(){ //similar idea to what was used in RestaurantReviews projects
+            
+            List<Product> allProducts = _bl.GetAllProducts();
+            Console.WriteLine("\nHere is a list of our Inventory:");
+
+            if(allProducts.Count == 0)
+            {
+                Console.WriteLine("New Orders are on the way");
+            }
+            else
+            {
+                foreach (Product prod in allProducts)
+                {
+                    Console.WriteLine("\n " + prod.ToString());
+                }
+
+            } 
+        }
+
+        public void Cart(List<LineItem> cart)
+        {
+            int total = 0;
+            foreach (LineItem prod in cart)
+            {
+                Product product = _bl.GetAllProducts(prod.ProductId);
+                Console.WriteLine($"{product.Name} \n Quantity: {prod.ItemQuantity}");
+                total += (int)((product.Price) * prod.ItemQuantity);
+            }
+            System.Console.WriteLine($"Total: ${total}");
+        }
+
+        private void CheckOut(Order order, StoreFront store)
+        {
+
+            _bl.PlaceOrder(order, store);
+            Console.WriteLine(currentOrder);
+            // List<Product> allProducts = _bl.GetAllProducts();
+            // List<LineItem> allLineItems = _bl.GetAllLineItems();
+            // int amt = 0;
+            // for(int i = 0; i < allProducts.Count; i++){
+            //     for(int j = 0; j < allLineItems.Count; j++){
+            //         if ( allProducts[i].Name == allLineItems[j].Name){
+            //             amt = (int)allProducts[i].Price;
+            //             // amt += amt;
+            //             break;
+            //         }
+            //     }
+            // Console.WriteLine($"Your price: {amt}");
+            // }
+
+        }
+
+        public StoreFront SelectStoreFront()
+        {
+            List<StoreFront> allStores = _bl.GetAllStoreFronts();
+        pickStore:
+            for (int i = 0; i < allStores.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {allStores[i]}");
+            }
+            Console.Write("Please choose a location: ");
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            if (parseSuccess && parsedInput >= 0 && parsedInput < allStores.Count)
+            {
+                StoreFront selectedStore = allStores[parsedInput];
+                Log.Information($"Accessing {selectedStore} data");
+                return selectedStore;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input");
+                goto pickStore;
+            }
+        }
+
+
+    }
+}
