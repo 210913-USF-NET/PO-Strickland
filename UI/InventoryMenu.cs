@@ -73,7 +73,7 @@ namespace UI
             {
                 foreach (Product prod in allProducts)
                 {
-                    Console.WriteLine("\nHere is a list of our Inventory:" + "\n\n " + prod.ToString());
+                    Console.WriteLine("\n " + prod.ToString());
                 }
 
             } 
