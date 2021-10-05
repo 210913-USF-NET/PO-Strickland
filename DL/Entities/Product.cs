@@ -18,7 +18,7 @@ namespace DL.Entities
         public string Name { get; set; }
         public int? Price { get; set; }
         public string Genre { get; set; }
-        public int? StoreQuantity { get; set; }
+        public int? Quantity { get; set; }
 
         public virtual ICollection<Inventory> Inventories { get; set; }
         public virtual ICollection<LineItem> LineItems { get; set; }

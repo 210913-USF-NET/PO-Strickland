@@ -15,9 +15,12 @@ namespace DL
 
         List<LineItem> GetAllLineItems();
 
+        List<Inventory> GetAllInventory();
+
         Customer AddCustomer(Customer cust); // added with the help of nick 
 
         Product AddProduct(Product prod);
+        StoreFront GetStore(int StoreFrontId);
         
         StoreFront AddStoreFront(StoreFront loc);
 
@@ -26,16 +29,26 @@ namespace DL
         PlacedOrder PlaceOrder(PlacedOrder order);
 
 
-        Product UpdateProduct(Product productToUpdate);
+        Product UpdateInventory(Inventory productToUpdate);
+
+        Models.Inventory placeitems(Models.Inventory quantity);
+
+        // public Inventory UpdateInventory(Inventory productToUpdate);
 
         Customer loginCustomer(Customer cust);
+
+        List<Inventory> ListInventoryByStore(int StoreFrontId);
 
 
         // Order AddOrder (Order ord);
 
         // List<Order> GetAllOrders(Order ord);
-        //Customer SearchCustomer(string searchCustomer);
+        // Customer SearchCustomer(string searchCustomer);
         List <Models.StoreFront> StoreLocation();
+        Order PlaceOrder(Order order, StoreFront store);
+        Order CreateCart(int customerId, int StoreId);
+
+        Product GetAllProducts(int Id);
 
         }
     }
