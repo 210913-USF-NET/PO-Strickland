@@ -10,7 +10,7 @@ namespace StoreBL
 
         StoreFront AddStoreFront(StoreFront loc);
     //******************************************************************
-
+        StoreFront GetStore(int StoreFrontId);
     //******************************************************************
         List<Customer> GetAllCustomers(); //change if doesnt work 
 
@@ -18,12 +18,14 @@ namespace StoreBL
 
     //*******************************************************************
         List<Product> GetAllProducts();
+        Product GetAllProducts(int Id);
 
         Product AddProduct(Product prod);
     //********************************************************************
 
-        Product UpdateProduct(Product productToUpdate );
-    
+        Product UpdateInventory(Inventory productToUpdate );
+
+        Models.Inventory placeitems(Models.Inventory quantity);
     //********************************************************************
 
         void loginCustomer(Customer customer);
@@ -35,8 +37,14 @@ namespace StoreBL
 
 
         List<LineItem> GetAllLineItems(); //change if doesnt work 
-
+        List<Inventory> GetAllInventory();
         LineItem AddLineItem(LineItem line); 
+
+        Order CreateCart(int customerId, int StoreId);
+        Order PlaceOrder(Order order, StoreFront store);
+
+        List<Inventory> ListInventoryByStore(int StoreFrontId);
+
         
     }
 
