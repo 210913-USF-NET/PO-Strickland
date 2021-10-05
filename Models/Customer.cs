@@ -30,11 +30,12 @@ namespace Models
         //Property
         public string Name { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         public string Email { get; set; }
 
         public int Id {get; set;}
+        public static int update {get; set;}
 
         public List<Order> Orders { get; set; } //customers owns this order class
         
