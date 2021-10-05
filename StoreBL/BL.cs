@@ -27,7 +27,10 @@ namespace StoreBL //never have the namespace title the same as the public class 
             return _repo.GetAllStoreFronts();
         }
         //*********************************************************
-
+        public StoreFront GetStore(int StoreFrontId)
+        {
+            return _repo.GetStore(StoreFrontId);
+        }
         //**********************************************************
 
         public Customer AddCustomer(Customer cust)
@@ -41,6 +44,9 @@ namespace StoreBL //never have the namespace title the same as the public class 
         {
 
             return _repo.AddProduct(prod); // going to DL
+        }
+        public List<Inventory> ListInventoryByStore(int StoreFrontId){
+            return _repo.ListInventoryByStore(StoreFrontId);
         }
 
         // public void AddStoreFront(StoreFront loc)
@@ -64,12 +70,19 @@ namespace StoreBL //never have the namespace title the same as the public class 
         {
             return _repo.GetAllProducts();
         }
+        public Product GetAllProducts(int Id){
+            return _repo.GetAllProducts(Id);
+        }
         //*************************************************************
 
-        public Product UpdateProduct(Product productToUpdate )
+        public Product UpdateInventory(Inventory productToUpdate )
 
         {
-            return _repo.UpdateProduct(productToUpdate);
+            return _repo.UpdateInventory(productToUpdate);
+        }
+
+        public Models.Inventory placeitems(Models.Inventory quantity){
+            return _repo.placeitems(quantity);
         }
 
         //*************************************************************
@@ -100,6 +113,11 @@ namespace StoreBL //never have the namespace title the same as the public class 
 
         }
 
+        public Order CreateCart(int customerId, int StoreId)
+        {
+            return _repo.CreateCart(customerId, StoreId);
+        }
+
 
         public List<LineItem> GetAllLineItems()
         {
@@ -111,6 +129,16 @@ namespace StoreBL //never have the namespace title the same as the public class 
         //     return _repo.GetAllProducts();
         // }
 
+        
+        public Order PlaceOrder(Order order, StoreFront store)
+        {
+            return _repo.PlaceOrder(order, store);
+        }
+
+        public List<Inventory> GetAllInventory(){
+            return _repo.GetAllInventory();
+        }
+        
     }
 }
     /*
