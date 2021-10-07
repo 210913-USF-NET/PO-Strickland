@@ -15,6 +15,8 @@ namespace Models
 
         public int ProductId  {get; set;}
 
+        public int StoreId { get; set; }
+
         public int? LineItemId {get; set;}
 
         public Product Item {get; set;}
@@ -28,6 +30,10 @@ namespace Models
             this.ItemQuantity = itemquantity;
         }
 
+        public Order Order { get; set; }
+        public StoreFront Store { get; set; }
+
+        public Product Product { get; set; }
         
 
 

@@ -30,6 +30,9 @@ namespace WebUI
             services.AddControllersWithViews();
             services.AddDbContext<P1DBContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("LuckyDisksDB")));
+            services.AddScoped<IRepo, DBRepo>();
+            services.AddScoped<IBL, BL>();
+            //The services.AddScoped above on 33 and 34 is our dependency injection. We're "registering" the dependencies that our controllers need. 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

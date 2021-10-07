@@ -33,7 +33,7 @@ namespace DL
 
         Models.Inventory placeitems(Models.Inventory quantity);
 
-        // public Inventory UpdateInventory(Inventory productToUpdate);
+       // public Inventory UpdateInventory(Inventory productToUpdate);
 
         Customer loginCustomer(Customer cust);
 

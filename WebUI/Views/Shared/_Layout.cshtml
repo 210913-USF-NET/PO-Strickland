@@ -24,6 +24,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item"> <!--Added 27-29 to put Lucky Disks Products tab on start up page-->
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LuckyDisks" asp-action="Index">Lucky Disks Products</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -31,7 +34,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @RenderBody() <!-- will act as container to hold the body-->
         </main>
     </div>
 

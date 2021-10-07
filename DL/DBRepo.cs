@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Model = Models; //this is how you give an alias to a namespace
-using Entity = DL.Entities; //this is how you give an alias to a namespace
+//using Model = Models; //this is how you give an alias to a namespace
+//using Entity = DL.Entities; //this is how you give an alias to a namespace
 using Models;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 
 namespace DL
@@ -13,17 +15,17 @@ namespace DL
     public class DBRepo : IRepo
     {
         //this needs dbcontext 
-        private Entity.P0LuckyDIsksContext _context;
+        private P1DBContext _context;
 
 
         //and these methods will get data from db
-        public DBRepo(Entity.P0LuckyDIsksContext context){
+        public DBRepo(P1DBContext context){
             _context = context; //whatever is passed in, we will save to our private field 
         }
         //and persist to db 
-        public Model.Customer AddCustomer(Model.Customer cust) //now we know that we are calling customer models 
+        public Customer AddCustomer(Customer cust) //now we know that we are calling customer models 
         {
-            Entity.Customer customerToAdd = new Entity.Customer(){
+            Customer customerToAdd = new Customer(){
                 Name = cust.Name,
                 Age = cust.Age,
                 Email = cust.Email
@@ -34,7 +36,7 @@ namespace DL
             _context.SaveChanges(); //this method will send it to the database. "changes" are not executed util you call the SaveChanges method
             _context.ChangeTracker.Clear();//it tracks entity, so call this. This clears the changeTracker method so it returns to a clean slate. 
 
-            return new Model.Customer(){
+            return new Customer(){
                 CustomerId = customerToAdd.Id,
                 Name = customerToAdd.Name,
                 Age = customerToAdd.Age,
@@ -43,9 +45,9 @@ namespace DL
             };
         }
 
-        public Model.LineItem AddLineItem(Model.LineItem line)
+        public LineItem AddLineItem(LineItem line)
         {
-            Entity.LineItem LineItemToAdd = new Entity.LineItem(){
+            LineItem LineItemToAdd = new LineItem(){
                 ItemQuantity = line.ItemQuantity
                 
             }; 
@@ -54,35 +56,42 @@ namespace DL
             _context.SaveChanges(); 
             _context.ChangeTracker.Clear(); 
 
-            return new Model.LineItem(){
+            return new LineItem(){
                 LineItemId = LineItemToAdd.Id,
                 ItemQuantity = LineItemToAdd.ItemQuantity
             };
         }
 
-        public Model.Product AddProduct(Model.Product prod)
+        public Product AddProduct(Product prod)
         {
-            Entity.Product productToAdd = new Entity.Product(){
-                Name = prod.Name,
-                Price = prod.Price,
-                Genre = prod.Genre
-            }; 
+            //Product productToAdd = new Product(){
+            //    Name = prod.Name,
+            //    Price = prod.Price,
+            //    Genre = prod.Genre
+            //}; 
 
-            productToAdd = _context.Products.Add(productToAdd).Entity;
-            _context.SaveChanges(); 
-            _context.ChangeTracker.Clear(); 
+            //productToAdd = _context.Products.Add(productToAdd).Entity;
+            //_context.SaveChanges(); 
+            //_context.ChangeTracker.Clear(); 
 
-            return new Model.Product(){
-                ProductId = productToAdd.Id,
-                Name = productToAdd.Name,
-                Price = productToAdd.Price,
-                Genre = productToAdd.Genre
-            };
+            //return new Product(){
+            //    ProductId = productToAdd.ProductId,
+            //    Name = productToAdd.Name,
+            //    Price = productToAdd.Price,
+            //    Genre = productToAdd.Genre
+            //};
+
+            //since we are not mapping anymore, all we need is this (Below) to add to database. 
+            prod = _context.Add(prod).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return prod;
         }
 
-        public Model.StoreFront AddStoreFront(Model.StoreFront loc)
+        public StoreFront AddStoreFront(StoreFront loc)
         {
-            Entity.StoreFront storeFrontToAdd = new Entity.StoreFront(){
+            StoreFront storeFrontToAdd = new StoreFront(){
                 StoreFrontName = loc.StoreFrontName,
                 Address = loc.Address
             }; 
@@ -91,17 +100,17 @@ namespace DL
             _context.SaveChanges(); 
             _context.ChangeTracker.Clear(); 
 
-            return new Model.StoreFront(){
-                StoreFrontId = storeFrontToAdd.Id,
+            return new StoreFront(){
+                StoreFrontId = storeFrontToAdd.StoreFrontId,
                 StoreFrontName = storeFrontToAdd.StoreFrontName,
                 Address = storeFrontToAdd.Address
             };
         }
 
-        public List<Model.Customer> GetAllCustomers()
+        public List<Customer> GetAllCustomers()
         {
             return _context.Customers.Select(
-                Customer => new Model.Customer(){
+                Customer => new Customer(){
                     CustomerId = Customer.Id,
                     Name = Customer.Name,
                     Age = Customer.Age,
@@ -111,10 +120,10 @@ namespace DL
             ).ToList();
         }
 
-        public List<Model.Inventory> GetAllInventory()
+        public List<Inventory> GetAllInventory()
         {
-            return _context.Inventories.Select(
-                Inventory => new Model.Inventory(){
+            return _context.Inventory.Select(
+                Inventory => new Inventory(){
                     Id = Inventory.Id,
                     StoreId = Inventory.StoreId,
                     ProductId = Inventory.ProductId,
@@ -124,22 +133,22 @@ namespace DL
             ).ToList();
         }
 
-        public List<Model.LineItem> GetAllLineItems()
+        public List<LineItem> GetAllLineItems()
         {
             return _context.LineItems.Select(
-                LineItem => new Model.LineItem(){
+                LineItem => new LineItem(){
                     LineItemId = LineItem.Id,
                     ItemQuantity = LineItem.ItemQuantity
                 }
             ).ToList();
         }
 
-        public List<Model.Product> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             //select * from in sql query
             return _context.Products.Select(
-                Product => new Model.Product(){
-                    ProductId = Product.Id,
+                Product => new Product(){
+                    ProductId = Product.ProductId,
                     Name = Product.Name,
                     Price = Product.Price,
                     Genre = Product.Genre
@@ -150,8 +159,8 @@ namespace DL
         public List<StoreFront> GetAllStoreFronts()
         {
             return _context.StoreFronts.Select(
-                StoreFront => new Model.StoreFront(){
-                    StoreFrontId = StoreFront.Id,
+                StoreFront => new StoreFront(){
+                    StoreFrontId = StoreFront.StoreFrontId,
                     StoreFrontName = StoreFront.StoreFrontName,
                     Address = StoreFront.Address
                 }
@@ -177,11 +186,11 @@ namespace DL
         //     return newAmount;
         // }  
 
-        public Models.Order CreateCart(int CustomersId, int StoreId)
+        public Order CreateCart(int CustomersId, int StoreId)
         {
             // Entity.Order cart = new Entity.Order() { };
             // cart.CustomerId = CustomerId;
-            Entity.Order cart = new Entity.Order()
+            Order cart = new Order()
             {
                 CustomersId = CustomersId,
                 StoreFrontId = StoreId,
@@ -190,7 +199,7 @@ namespace DL
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
 
-            return new Models.Order()
+            return new Order()
             {
                 Id = cart.Id,
                 CustomersId = (int)cart.CustomersId,
@@ -198,15 +207,36 @@ namespace DL
             };
         }
         //Select * FROM Inventory JOIN PRODUCT ON Product.Id = Inventory.ProductId
-        public List<Models.Inventory> ListInventoryByStore(int StoreFrontId)
+        
+        public List<Inventory> ListInventoryByStore(int StoreFrontId)
         {
-            return _context.Inventories.Include("Product").Where(i => i.StoreId == StoreFrontId ).Select(
-                Inventory => new Model.Inventory(){
+            return _context.Inventory.Include("Product").Where(i => i.StoreId == StoreFrontId ).Select(
+                Inventory => new Inventory(){
                     Id = Inventory.Id,
                     StoreId = Inventory.StoreId,
                     ProductId = Inventory.ProductId,
                     Quantity = (int)Inventory.Quantity,
-                    Item = new Models.Product (){
+                    Item = new Product (){
+                        ProductId = Inventory.Product.ProductId,
+                        Name = Inventory.Product.Name,
+                        Genre = Inventory.Product.Genre,
+                        Price = Inventory.Product.Price,
+                        StoreQuantity = Inventory.Product.StoreQuantity
+                    }
+                }
+            ).ToList();
+        }
+        
+        /*
+         public List<Inventory> ListInventoryByStore(int StoreFrontId)
+        {
+            return _context.Inventories.Include("Product").Where(i => i.StoreId == StoreFrontId ).Select(
+                Inventory => new Inventory(){
+                    Id = Inventory.Id,
+                    StoreId = Inventory.StoreId,
+                    ProductId = Inventory.ProductId,
+                    Quantity = (int)Inventory.Quantity,
+                    Item = new Product (){
                         ProductId = Inventory.Product.Id,
                         Name = Inventory.Product.Name,
                         Genre = Inventory.Product.Genre,
@@ -216,17 +246,20 @@ namespace DL
                 }
             ).ToList();
         }
-        public Models.Order PlaceOrder(Models.Order order, Models.StoreFront store)
+        */
+
+
+        public Order PlaceOrder(Order order, StoreFront store)
         {
-            Entity.Order ordertoAdd = new Entity.Order(){
+            Order ordertoAdd = new Order(){
                 StoreFrontId = order.StoreFrontId,
                 CustomersId = order.CustomersId
             };
             ordertoAdd = _context.Add(ordertoAdd).Entity;
             _context.SaveChanges();
-            foreach (Models.LineItem item in order.LineItems)
+            foreach (LineItem item in order.LineItems)
             {
-                Entity.LineItem itemToAdd = new Entity.LineItem()
+                LineItem itemToAdd = new LineItem()
                 {
                     StoreId = store.StoreFrontId,
                     ProductId = item.ProductId,
@@ -234,7 +267,7 @@ namespace DL
                     OrderId = ordertoAdd.Id
                 };
                 itemToAdd = _context.Add(itemToAdd).Entity;
-                Entity.Inventory updatedInventory = _context.Inventories.FirstOrDefault(i => i.Id == item.InventoryId);
+                Inventory updatedInventory = _context.Inventory.FirstOrDefault(i => i.Id == item.InventoryId);
                 updatedInventory.Quantity -= item.ItemQuantity;
                 _context.Update(updatedInventory);
             }
@@ -251,10 +284,10 @@ namespace DL
         {
             throw new NotImplementedException();
         }
-        public List<Models.Product> ListOfProducts()
+        public List<Product> ListOfProducts()
         {
             return _context.Products.Select(
-                Product => new Model.Product() {
+                Product => new Product() {
     
                     Name = Product.Name,
                     Price = Product.Price
@@ -265,9 +298,9 @@ namespace DL
         }
 
 
-        public Model.LineItem CheckOutList(Models.LineItem line)
+        public LineItem CheckOutList(LineItem line)
         {
-            Entity.LineItem toAdd = new Entity.LineItem();
+            LineItem toAdd = new LineItem();
             toAdd.ItemQuantity = line.ItemQuantity;
             toAdd.ProductId = line.ProductId;
             toAdd = _context.LineItems.Add(toAdd).Entity;
@@ -276,9 +309,9 @@ namespace DL
             return line;
         }
 
-        public List<Models.PlacedOrder> CustOrderHist()
+        public List<PlacedOrder> CustOrderHist()
         {
-            return _context.Orders.Where(order => order.CustomersId == Models.Customer.update).Select(old => new Model.PlacedOrder(){
+            return _context.Orders.Where(order => order.CustomersId == Customer.update).Select(old => new PlacedOrder(){
                     Id = old.Id,
                     CustomerId = old.CustomersId,
                     StoreFrontId = old.StoreFrontId
@@ -286,25 +319,25 @@ namespace DL
             ).ToList();
         }
 
-        public List <Models.Order> OrderHistory()
+        public List <Order> OrderHistory()
         {
-            return _context.Orders.Where(order => order.StoreFrontId == Models.StoreFront.update).Select(old => new Model.Order(){
+            return _context.Orders.Where(order => order.StoreFrontId == StoreFront.update).Select(old => new Order(){
                     Id = old.Id,
                     CustomersId = old.CustomersId,
                     StoreFrontId = old.StoreFrontId
             }
             ).ToList();
         }
-
-        public Models.StoreFront GetStore(int StoreFrontId)
+        
+        public StoreFront GetStore(int StoreFrontId)
         {
-            Entity.StoreFront getStore = _context.StoreFronts.Include(x => x.Inventories).FirstOrDefault(x => x.Id == StoreFrontId);
+            StoreFront getStore = _context.StoreFronts.Include(x => x.Inventory).FirstOrDefault(x => x.StoreFrontId == StoreFrontId);
 
-            return new Models.StoreFront()
+            return new StoreFront()
             {
-                StoreFrontId = getStore.Id,
+                StoreFrontId = getStore.StoreFrontId,
                 StoreFrontName = getStore.StoreFrontName,
-                Inventory = getStore.Inventories.Select(x => new Models.Inventory()
+                Inventory = getStore.Inventory.Select(x => new Inventory()
                 {
                     StoreId = (int)x.StoreId,
                     ProductId = (int)x.ProductId,
@@ -313,10 +346,10 @@ namespace DL
             
             };
         }
-
-        public Model.PlacedOrder PlaceOrder(Models.PlacedOrder finalorder)
+        
+        public PlacedOrder PlaceOrder(PlacedOrder finalorder)
         {
-            Entity.Order toAdd = new Entity.Order();
+            Order toAdd = new Order();
             toAdd.CustomersId = finalorder.CustomerId;
             toAdd.StoreFrontId = finalorder.StoreFrontId;
             toAdd = _context.Orders.Add(toAdd).Entity;
@@ -325,12 +358,12 @@ namespace DL
             return finalorder;
         }
 
-        public List <Models.StoreFront> StoreLocation()
+        public List <StoreFront> StoreLocation()
         {
             return _context.StoreFronts.Select(
-                StoreFronts => new Model.StoreFront() {
+                StoreFronts => new StoreFront() {
     
-                    StoreFrontId = StoreFronts.Id,
+                    StoreFrontId = StoreFronts.StoreFrontId,
                     StoreFrontName = StoreFronts.StoreFrontName,
                     Address = StoreFronts.Address
                 }
@@ -343,7 +376,7 @@ namespace DL
             return _context.Customers.Where(
                 customer => customer.Name.Contains(querycust)
             ).Select(
-                c => new Models.Customer()
+                c => new Customer()
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -352,12 +385,12 @@ namespace DL
             ).OrderBy(c => c.Name).ToList();
         }
 
-        public Models.Inventory placeitems(Models.Inventory quantity)
+        public Inventory placeitems(Inventory quantity)
         {
-            Entity.Inventory toAdd = new Entity.Inventory();
+            Inventory toAdd = new Inventory();
             toAdd.Quantity = quantity.Quantity;
             toAdd.ProductId = quantity.ProductId;
-            toAdd = _context.Inventories.Add(toAdd).Entity;
+            toAdd = _context.Inventory.Add(toAdd).Entity;
             _context.SaveChanges();
             quantity.StoreId = toAdd.Id;
             return quantity;
@@ -368,16 +401,17 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public Models.Product GetAllProducts(int Id){
-            Entity.Product getAllProducts = _context.Products.FirstOrDefault(p => p.Id == Id);
-            return new Models.Product()
+        
+        public Product GetAllProducts(int Id){
+            Product getAllProducts = _context.Products.FirstOrDefault(p => p.ProductId == Id);
+            return new Product()
             {
-                ProductId = getAllProducts.Id,
+                ProductId = getAllProducts.ProductId,
                 Name = getAllProducts.Name,
                 Genre = getAllProducts.Genre,
                 Price = getAllProducts.Price,
-                StoreQuantity = getAllProducts.Quantity,
-                Inventory = getAllProducts.Inventories.Select(x => new Models.Inventory()
+                StoreQuantity = getAllProducts.StoreQuantity,
+                Inventory = getAllProducts.Inventory.Select(x => new Inventory()
                 {
                     StoreId = (int)x.StoreId,
                     ProductId = (int)x.ProductId,
@@ -385,5 +419,6 @@ namespace DL
                 }).ToList()
         };
     }
+        
     }
 }

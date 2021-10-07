@@ -5,7 +5,8 @@ namespace Models
     public class Inventory //it is a combination of product and quantity and is owned by store class. 
     {
         public Inventory (){} 
-        public Inventory(Product name, int quantity, int? productId, int? storeId) 
+        /*
+        public Inventory(Product name, int? quantity, int? productId, int? storeId) 
         {
             this.Name = name;
     this.Quantity = quantity;
@@ -13,16 +14,21 @@ namespace Models
     this.StoreId = storeId;
    
         }
-                public Product Name { get; set; } // we took the product class and nested it in this Inventory class. 
+        */
+        //public Product Name { get; set; } // we took the product class and nested it in this Inventory class. 
         
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         public int Id {get; set;}
 
         public int? ProductId {get; set;}
 
         public int? StoreId {get; set;}
-        public Product Item {get; set;}
+        public Product Item { get; set; }
+
+        public Product Product { get; set; }
+        public StoreFront Store { get; set; }
+
         public Inventory(int? storeId, int? productId, int quantity)
         {
             this.StoreId = storeId;

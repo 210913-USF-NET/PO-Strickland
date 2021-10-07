@@ -27,6 +27,7 @@ namespace Models
         
 
         public List<Inventory> Inventory { get; set; }
+      
 
         public override string ToString()
         {
@@ -36,6 +37,7 @@ namespace Models
         public bool Equals(StoreFront loc){
             return this.StoreFrontName == loc.StoreFrontName && this.Address == loc.Address;
         }
+        public LineItem LineItems { get; set; }
 
 
     }

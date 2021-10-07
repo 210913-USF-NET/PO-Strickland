@@ -51,6 +51,7 @@ namespace Models
         
 
         public int ProductId {get; set;}
+       
 
         public List<LineItem> LineItems { get; set; } //products own the lineItem
         public List<Inventory> Inventory { get; set; }
@@ -58,12 +59,16 @@ namespace Models
 
         public List<Review> Reviews {get; set;} //just added
 
-        public List<Order> Orders {get; set;} 
+        public List<Order> Orders {get; set;}
+
+        
+
+
 
         /*
         need this below to attach the review to a product item
         without this, I kept receiving a System.ArgumentOutOfRangeException 
-        message. I am not sure why this make it work */ 
+        message. I am not sure why this make it work */
 
         public bool Equals(Product prod){
             return this.Name == prod.Name && this.Price == prod.Price && this.Genre == prod.Genre;
