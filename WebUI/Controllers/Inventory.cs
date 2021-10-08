@@ -5,48 +5,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StoreBL;
-using Models;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-
-    public class LuckyDisksController : Controller
+    public class Inventory : Controller
     {
         private IBL _bl;
-        // GET: LuckyDisksController
-        public LuckyDisksController(IBL bl)
+        public Inventory(IBL bl)
         {
             _bl = bl;
         }
+        // GET: Inventory
         public ActionResult Index()
         {
-            List<ProductVM> allProd = _bl.GetAllProducts().Select(r => new ProductVM(r)).ToList();
-            
-            return View(allProd);
+            //List<Inventory> inv = _bl.GetAllInventory();
+            return View();
         }
 
-        // GET: LuckyDisksController/Create
+        // GET: Inventory/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: Inventory/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: LuckyDisksController/Create
+        // POST: Inventory/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductVM product)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                //the data in my form is valid
-                if (ModelState.IsValid) //this tells us if there are any errors persisting
-                {
-                    _bl.AddProduct(product.ToModel());
-                    return RedirectToAction(nameof(Index));
-                }
-                //if the 'IF' statement is not valid or not true, then have the user try again
-                return View();
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
@@ -54,14 +50,13 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: LuckyDisksController/Edit/5
+        // GET: Inventory/Edit/5
         public ActionResult Edit(int id)
         {
-            
-            return View(new ProductVM(_bl.GetOneProductById(id)));
+            return View();
         }
 
-        // POST: LuckyDisksController/Edit/5
+        // POST: Inventory/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -76,13 +71,13 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: LuckyDisksController/Delete/5
+        // GET: Inventory/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: LuckyDisksController/Delete/5
+        // POST: Inventory/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -91,9 +86,8 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
                 return View();
             }
         }

@@ -45,7 +45,9 @@ namespace StoreBL
 
         List<Inventory> ListInventoryByStore(int StoreFrontId);
 
-        
+        Product GetOneProductById(int id);
+        StoreFront GetOneStoreById(int Id);
+
     }
 
     /*

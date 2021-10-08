@@ -1,5 +1,8 @@
+
 using System;
 using System.Collections.Generic;
+using Serilog;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -8,11 +11,12 @@ namespace Models
         public StoreFront() {
         }
 
-        public StoreFront(string name) : this(){
+        public StoreFront (int StoreFrontId) : this() { }
+        public StoreFront(int StoreFrontId, string name) : this(StoreFrontId){
             this.StoreFrontName = name;
         }
 
-        public StoreFront(string name, string address) : this(name)
+        public StoreFront(int StoreFrontId, string name, string address) : this(StoreFrontId, name)
         {
             this.Address = address;
         }
@@ -38,7 +42,7 @@ namespace Models
             return this.StoreFrontName == loc.StoreFrontName && this.Address == loc.Address;
         }
         public LineItem LineItems { get; set; }
-
-
+        public string Name { get; set; }
+        public string Genre { get; set; }
     }
 }

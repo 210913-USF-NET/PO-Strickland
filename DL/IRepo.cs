@@ -50,5 +50,9 @@ namespace DL
 
         Product GetAllProducts(int Id);
 
-        }
+        Product GetOneProductById(int Id);
+
+        StoreFront GetOneStoreById(int Id);
+
+    }
     }

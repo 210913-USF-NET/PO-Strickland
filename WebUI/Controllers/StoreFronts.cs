@@ -5,44 +5,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StoreBL;
-using Models;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-
-    public class LuckyDisksController : Controller
+    public class StoreFronts : Controller
     {
         private IBL _bl;
-        // GET: LuckyDisksController
-        public LuckyDisksController(IBL bl)
+        public StoreFronts(IBL bl)
         {
             _bl = bl;
         }
+        // GET: StoreFronts
         public ActionResult Index()
         {
-            List<ProductVM> allProd = _bl.GetAllProducts().Select(r => new ProductVM(r)).ToList();
-            
-            return View(allProd);
+            //List<StoreFronts> stores = _bl.GetAllStoreFronts();
+            List<StoreFrontsVM> allStores = _bl.GetAllStoreFronts().Select(r => new StoreFrontsVM(r)).ToList();
+            return View(allStores);
         }
 
-        // GET: LuckyDisksController/Create
+        // GET: StoreFronts/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: StoreFronts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: LuckyDisksController/Create
+        // POST: StoreFronts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductVM product)
+        public ActionResult Create(StoreFrontsVM storefront)
         {
             try
             {
                 //the data in my form is valid
                 if (ModelState.IsValid) //this tells us if there are any errors persisting
                 {
-                    _bl.AddProduct(product.ToModel());
+                    _bl.AddStoreFront(storefront.ToModel());
                     return RedirectToAction(nameof(Index));
                 }
                 //if the 'IF' statement is not valid or not true, then have the user try again
@@ -54,14 +58,13 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: LuckyDisksController/Edit/5
+        // GET: StoreFronts/Edit/5
         public ActionResult Edit(int id)
         {
-            
-            return View(new ProductVM(_bl.GetOneProductById(id)));
+            return View(new StoreFrontsVM(_bl.GetOneStoreById(id)));
         }
 
-        // POST: LuckyDisksController/Edit/5
+        // POST: StoreFronts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -76,13 +79,13 @@ namespace WebUI.Controllers
             }
         }
 
-        // GET: LuckyDisksController/Delete/5
+        // GET: StoreFronts/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: LuckyDisksController/Delete/5
+        // POST: StoreFronts/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -91,9 +94,8 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
                 return View();
             }
         }

@@ -1,0 +1,1 @@
+Server=tcp:ctstrick.database.windows.net,1433;Initial Catalog=P0 Lucky DIsks;Persist Security Info=False;User ID=ctstrick90;Password=Football61!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;

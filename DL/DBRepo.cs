@@ -91,20 +91,25 @@ namespace DL
 
         public StoreFront AddStoreFront(StoreFront loc)
         {
-            StoreFront storeFrontToAdd = new StoreFront(){
-                StoreFrontName = loc.StoreFrontName,
-                Address = loc.Address
-            }; 
+            //StoreFront storeFrontToAdd = new StoreFront(){
+            //    StoreFrontName = loc.StoreFrontName,
+            //    Address = loc.Address
+            //}; 
 
-            storeFrontToAdd = _context.StoreFronts.Add(storeFrontToAdd).Entity; 
-            _context.SaveChanges(); 
-            _context.ChangeTracker.Clear(); 
+            //storeFrontToAdd = _context.StoreFronts.Add(storeFrontToAdd).Entity; 
+            //_context.SaveChanges(); 
+            //_context.ChangeTracker.Clear(); 
 
-            return new StoreFront(){
-                StoreFrontId = storeFrontToAdd.StoreFrontId,
-                StoreFrontName = storeFrontToAdd.StoreFrontName,
-                Address = storeFrontToAdd.Address
-            };
+            //return new StoreFront(){
+            //    StoreFrontId = storeFrontToAdd.StoreFrontId,
+            //    StoreFrontName = storeFrontToAdd.StoreFrontName,
+            //    Address = storeFrontToAdd.Address
+            //};
+            loc = _context.Add(loc).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return loc;
         }
 
         public List<Customer> GetAllCustomers()
@@ -419,6 +424,20 @@ namespace DL
                 }).ToList()
         };
     }
-        
+        public Product GetOneProductById(int id)
+        {
+            return _context.Products
+                .AsNoTracking()
+                .Include(r => r.Inventory)
+                .FirstOrDefault(r => r.ProductId == id);
+        }
+
+        public StoreFront GetOneStoreById(int id)
+        {
+            return _context.StoreFronts
+                .AsNoTracking()
+                .Include(r => r.Inventory)
+                .FirstOrDefault(r => r.StoreFrontId == id);
+        }
     }
 }

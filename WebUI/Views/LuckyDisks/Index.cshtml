@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Product>
+﻿@model IEnumerable<WebUI.Models.ProductVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -50,8 +50,7 @@
                     @Html.DisplayFor(modelItem => item.ProductId)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>

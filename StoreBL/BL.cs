@@ -26,6 +26,9 @@ namespace StoreBL //never have the namespace title the same as the public class 
         {
             return _repo.GetAllStoreFronts();
         }
+        
+
+
         //*********************************************************
         public StoreFront GetStore(int StoreFrontId)
         {
@@ -138,7 +141,16 @@ namespace StoreBL //never have the namespace title the same as the public class 
         public List<Inventory> GetAllInventory(){
             return _repo.GetAllInventory();
         }
-        
+
+        public Product GetOneProductById (int Id)
+        {
+            return _repo.GetOneProductById(Id);
+        }
+
+        public StoreFront GetOneStoreById(int Id)
+        {
+            return _repo.GetOneStoreById(Id);
+        }
     }
 }
     /*

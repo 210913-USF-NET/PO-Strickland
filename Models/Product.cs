@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Serilog;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Models
@@ -16,19 +17,24 @@ namespace Models
         //The constructor behaves differently
         //depending on what is passed in
         //behaves this way when a name is passed in
-        public Product(string name) : this ()
+        public Product(int ProductId) : this()
         {
+            this.ProductId = ProductId;
+        }
+        public Product(int ProductId, string name) : this(ProductId)
+        {
+            
             Log.Debug("Creating product");
             this.Name = name;
         }
 
         //constructor chaining : behaves this way when a age is passed in 
-        public Product(string name, int price) : this(name)
+        public Product(int ProductId, string name, int price) : this(ProductId, name)
         {
             this.Price = price;
         }
 
-        public Product(string name, int price, string genre) : this(name, price)
+        public Product(int ProductId, string name, int price, string genre) : this(ProductId, name, price)
         {
             this.Genre = genre;
         }
@@ -37,17 +43,18 @@ namespace Models
         // {
         //     this.Quantity = quantity;
         // }
-
-
-        public string Name { get; set; }
+        //private string _name;
         
+        [Required]
+        public string Name { get; set; }
+       
 
-        public int? Price { get; set; } //decimal is a data type that makes things line up exactly like money
+        public int Price { get; set; } //decimal is a data type that makes things line up exactly like money
 
         public string Genre { get; set; }
 
         //public int? Quantity { get; set; }
-        public int? StoreQuantity { get; set; }
+        public int StoreQuantity { get; set; }
         
 
         public int ProductId {get; set;}
